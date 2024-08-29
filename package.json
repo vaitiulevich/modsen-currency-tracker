@@ -20,8 +20,13 @@
     "start": "webpack serve --mode development",
     "build": "webpack --mode production",
     "test": "react-scripts test",
-    "lint": "eslint /**/*.{js,jsx,ts,tsx}",
+    "lint": "eslint src/**/*.{js,jsx,ts,tsx}",
     "eject": "react-scripts eject"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "eslintConfig": {
     "extends": [

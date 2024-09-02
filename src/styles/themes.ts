@@ -11,12 +11,14 @@ export const darkTheme: DefaultTheme = {
     secondaryFont: '#A7B2C3',
     linerGradientHero: 'linear-gradient(252.93deg, #24794000 1%, #121212 100%)',
     errMessage: '##e40000',
+    footerSecondaryFont: '#656565',
   },
   typography: {
     fontSize: {
       small: '0.8rem',
       medium: '1rem',
-      large: '2.5rem',
+      average: '1.3rem',
+      large: '1.8rem',
       largest: '3.5rem',
     },
     fontWeight: {
@@ -40,7 +42,7 @@ export const lightTheme: DefaultTheme = {
   colors: {
     accent: '#00BC4F',
     accentFont:
-      'linear-gradient(90.18deg, #00CE2C 0.18%, #eaffae 49.3%, #A3DC00 99.88%)',
+      'linear-gradient(90.18deg, #00CE2C 0.18%, #AEDF23 49.3%, #A3DC00 99.88%)',
     fillBackground: '#fff',
     fillSecondary: '#f5f5f5',
     generalFont: '#030304',
@@ -48,12 +50,14 @@ export const lightTheme: DefaultTheme = {
     linerGradientHero:
       'linear-gradient(359.93deg, #24794000 1%, #355634 100%);',
     errMessage: '##e40000',
+    footerSecondaryFont: '#656565',
   },
   typography: {
     fontSize: {
       small: '0.8rem',
       medium: '1rem',
-      large: '2.5rem',
+      average: '1.3rem',
+      large: '1.8rem',
       largest: '3.5rem',
     },
     fontWeight: {

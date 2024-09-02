@@ -28,7 +28,12 @@ const GlobalStyle = createGlobalStyle`
    }
    a{
     text-decoration: none;
+    cursor: pointer;
     color: ${(props) => props.theme.colors.generalFont};
+   }
+   p,h1,h2,h3{
+    margin: 0;
+    padding: 0;
    }
 `;
 export default GlobalStyle;

@@ -11,11 +11,13 @@ declare module 'styled-components' {
       secondaryFont: string;
       linerGradientHero: string;
       errMessage: string;
+      footerSecondaryFont: string;
     };
     typography: {
       fontSize: {
         small: string;
         medium: string;
+        average: string;
         large: string;
         largest: string;
       };

@@ -1,20 +1,62 @@
 import logo from '@assets/logo.svg';
 import React from 'react';
 
-import { FooterContainer, Logo, Nav, NavItem } from './styled';
+import {
+  Column,
+  CopyrightInfo,
+  FooterContainer,
+  FooterContent,
+  LinksContainer,
+  Logo,
+  LogoHeadline,
+  LogoTitle,
+  NavItem,
+  TopFooter,
+} from './styled';
 
 const Footer: React.FC = () => {
   return (
     <FooterContainer>
-      <Logo>
-        <img src={logo} alt="logo" />
-      </Logo>
-      <Nav>
-        <NavItem href="#home">Home</NavItem>
-        <NavItem href="#timeline">Timeline</NavItem>
-        <NavItem href="#bank-card">Bank card</NavItem>
-        <NavItem href="#contact">Contact</NavItem>
-      </Nav>
+      <TopFooter>
+        <FooterContent>
+          <LogoHeadline>
+            <Logo>
+              <img src={logo} alt="logo" />
+            </Logo>
+            <LogoTitle>Modsen Currency Tracker</LogoTitle>
+          </LogoHeadline>
+
+          <p>
+            Since then, the company has grown organically to. Starsup is the
+            world's largest trading platform, with $12 billion worth of currency
+            trading and 500,000 tickets sold daily to tens of thousands of
+            traders worldwide.
+          </p>
+        </FooterContent>
+
+        <LinksContainer>
+          <Column>
+            <h3>General</h3>
+            <NavItem href="#market">Market</NavItem>
+            <NavItem href="#service">Service</NavItem>
+          </Column>
+          <Column>
+            <h3>Product</h3>
+            <NavItem href="#sparks">Sparks</NavItem>
+            <NavItem href="#snaps">Snaps</NavItem>
+          </Column>
+          <Column>
+            <h3>Community</h3>
+            <NavItem href="#ideas">Ideas</NavItem>
+            <NavItem href="#streams">Streams</NavItem>
+          </Column>
+        </LinksContainer>
+      </TopFooter>
+      <div>
+        <CopyrightInfo>
+          Startsup © 2023-2024, All Rights Reserved
+        </CopyrightInfo>
+      </div>
     </FooterContainer>
   );
 };

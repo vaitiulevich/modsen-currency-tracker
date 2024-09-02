@@ -1,4 +1,5 @@
 import Header from '@components/Header/Header';
+import Hero from '@components/Hero/Hero';
 import { RootState } from '@store/store';
 import GlobalStyle from '@styles/global';
 import { darkTheme, lightTheme } from '@styles/themes';
@@ -15,6 +16,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Header />
+      <Hero />
     </ThemeProvider>
   );
 }

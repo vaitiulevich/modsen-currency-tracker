@@ -1,6 +1,6 @@
 import { TOGGLE_THEME } from '@constants/actionTypes';
 
-interface ThemeState {
+export interface ThemeState {
   currentTheme: 'light' | 'dark';
 }
 

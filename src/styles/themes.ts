@@ -9,15 +9,14 @@ export const darkTheme: DefaultTheme = {
     fillSecondary: '#202025',
     generalFont: '#D9D9D9',
     secondaryFont: '#A7B2C3',
-    linerGradientHero:
-      'linear-gradient(252.93deg, #121212 11.77%, #247940 91.12%)',
+    linerGradientHero: 'linear-gradient(252.93deg, #24794000 1%, #121212 100%)',
     errMessage: '##e40000',
   },
   typography: {
     fontSize: {
       small: '0.8rem',
       medium: '1rem',
-      large: '2rem',
+      large: '2.5rem',
       largest: '3.5rem',
     },
     fontWeight: {
@@ -30,7 +29,7 @@ export const darkTheme: DefaultTheme = {
     },
   },
   indents: {
-    containerPaddingDesctop: '1rem 15%',
+    containerPaddingDesctop: '1rem 13%',
     containerPaddingLaptop: '1rem 8%',
     containerPaddingMobile: '1rem 4%',
   },
@@ -41,20 +40,20 @@ export const lightTheme: DefaultTheme = {
   colors: {
     accent: '#00BC4F',
     accentFont:
-      'linear-gradient(90.18deg, #00CE2C 0.18%, #AEDF23 49.3%, #A3DC00 99.88%)',
+      'linear-gradient(90.18deg, #00CE2C 0.18%, #eaffae 49.3%, #A3DC00 99.88%)',
     fillBackground: '#fff',
     fillSecondary: '#f5f5f5',
     generalFont: '#030304',
     secondaryFont: '#030304',
     linerGradientHero:
-      'linear-gradient(252.93deg, #121212 11.77%, #247940 91.12%)',
+      'linear-gradient(359.93deg, #24794000 1%, #355634 100%);',
     errMessage: '##e40000',
   },
   typography: {
     fontSize: {
       small: '0.8rem',
       medium: '1rem',
-      large: '2rem',
+      large: '2.5rem',
       largest: '3.5rem',
     },
     fontWeight: {
@@ -67,7 +66,7 @@ export const lightTheme: DefaultTheme = {
     },
   },
   indents: {
-    containerPaddingDesctop: '1rem 15%',
+    containerPaddingDesctop: '1rem 13%',
     containerPaddingLaptop: '1rem 8%',
     containerPaddingMobile: '1rem 4%',
   },

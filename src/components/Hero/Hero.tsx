@@ -1,5 +1,4 @@
 import logo from '@assets/logo.svg';
-import { RootState } from '@store/store';
 import React from 'react';
 
 import {

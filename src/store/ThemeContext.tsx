@@ -14,14 +14,19 @@ export const ThemeContext = createContext<ThemeState | undefined>(undefined);
 export const ThemeProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [currentTheme, setCurrentTheme] = useState<DefaultTheme>(darkTheme);
-  const [isLight, setisLight] = useState(false);
+  const [isLight, setisLight] = useState(
+    localStorage.getItem('isLightTheme') === 'true',
+  );
+  const [currentTheme, setCurrentTheme] = useState<DefaultTheme>(
+    isLight ? lightTheme : darkTheme,
+  );
 
   const toggleTheme = () => {
     setCurrentTheme((prevTheme) =>
       prevTheme === darkTheme ? lightTheme : darkTheme,
     );
     setisLight(!isLight);
+    localStorage.setItem('isLightTheme', JSON.stringify(!isLight));
   };
 
   return (

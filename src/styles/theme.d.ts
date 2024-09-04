@@ -8,10 +8,12 @@ declare module 'styled-components' {
       fillBackground: string;
       fillSecondary: string;
       generalFont: string;
+      hoverFill: string;
       secondaryFont: string;
       linerGradientHero: string;
       errMessage: string;
       footerSecondaryFont: string;
+      modalFill: string;
     };
     typography: {
       fontSize: {
@@ -35,6 +37,9 @@ declare module 'styled-components' {
       containerPaddingLaptop: string;
       containerPaddingMobile: string;
     };
-    border: string;
+    border: {
+      borderPanels: string;
+      borderSwither: string;
+    };
   }
 }

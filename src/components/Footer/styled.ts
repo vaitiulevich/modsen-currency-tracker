@@ -9,6 +9,7 @@ export const FooterContainer = styled.footer`
   background-color: ${(props) => props.theme.colors.fillBackground};
   padding: ${(props) => props.theme.indents.containerPaddingDesctop};
   color: ${(props) => props.theme.colors.generalFont};
+  margin-top: 2rem;
 
   @media (max-width: ${breakpoints.tablet}px) {
     padding: ${(props) => props.theme.indents.containerPaddingLaptop};

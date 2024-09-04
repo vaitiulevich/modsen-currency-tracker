@@ -12,25 +12,6 @@ import {
 } from './styled';
 
 const Hero: React.FC = () => {
-  const periodId = '1MIN';
-  axios
-    .get(
-      `https://rest.coinapi.io/v1/ohlcv/BITSTAMP_SPOT_BTC_USD/latest?period_id=${periodId}`,
-      {
-        headers: { 'X-CoinAPI-Key': '910C1E7C-062B-49F4-A48B-F3D82043D025' },
-      },
-    )
-    .then((res) => console.log(res))
-    .catch((err) => console.log(err));
-  axios
-    .get(
-      `https://rest.coinapi.io/v1/assets?filter_asset_id=BTC;CAD;AUD;EUR;ARS;CNY;USD;JPY`,
-      {
-        headers: { 'X-CoinAPI-Key': '910C1E7C-062B-49F4-A48B-F3D82043D025' },
-      },
-    )
-    .then((res) => console.log(res))
-    .catch((err) => console.log(err));
   return (
     <>
       <HeroContainer>

@@ -8,10 +8,12 @@ export const darkTheme: DefaultTheme = {
     fillBackground: '#030304',
     fillSecondary: '#202025',
     generalFont: '#D9D9D9',
+    hoverFill: '#292930',
     secondaryFont: '#A7B2C3',
     linerGradientHero: 'linear-gradient(252.93deg, #24794000 1%, #121212 100%)',
     errMessage: '##e40000',
     footerSecondaryFont: '#656565',
+    modalFill: '#6868682b',
   },
   typography: {
     fontSize: {
@@ -35,7 +37,10 @@ export const darkTheme: DefaultTheme = {
     containerPaddingLaptop: '1rem 8%',
     containerPaddingMobile: '1rem 4%',
   },
-  border: 'solid 0.01rem #FFFFFF',
+  border: {
+    borderPanels: 'solid 0.01rem #474747',
+    borderSwither: 'solid 0.01rem #fff',
+  },
 };
 
 export const lightTheme: DefaultTheme = {
@@ -47,10 +52,12 @@ export const lightTheme: DefaultTheme = {
     fillSecondary: '#f5f5f5',
     generalFont: '#030304',
     secondaryFont: '#030304',
+    hoverFill: '#dddcdc',
     linerGradientHero:
       'linear-gradient(359.93deg, #24794000 1%, #355634 100%);',
     errMessage: '##e40000',
     footerSecondaryFont: '#656565',
+    modalFill: '#ffffffc4',
   },
   typography: {
     fontSize: {
@@ -74,5 +81,8 @@ export const lightTheme: DefaultTheme = {
     containerPaddingLaptop: '1rem 8%',
     containerPaddingMobile: '1rem 4%',
   },
-  border: 'solid 0.01rem #030304',
+  border: {
+    borderPanels: 'solid 0.01rem #dfdfdf',
+    borderSwither: 'solid 0.01rem #030304',
+  },
 };

@@ -16,7 +16,7 @@ export const ToggleSlider = styled.span<{ checked: boolean }>`
   height: 24px;
   background-color: ${({ checked }) => (checked ? '#4CAF50' : '#ccc')};
   border-radius: 50px;
-  border: ${(props) => props.theme.border};
+  border: ${(props) => props.theme.border.borderSwither};
   background-color: transparent;
   transition: background-color 0.2s ease;
 
@@ -28,7 +28,7 @@ export const ToggleSlider = styled.span<{ checked: boolean }>`
     border-radius: 50%;
     background: white;
     transition: transform 0.2s ease;
-    border: ${(props) => props.theme.border};
+    border: ${(props) => props.theme.border.borderSwither};
     background-color: transparent;
     transform: ${({ checked }) =>
       checked ? 'translateX(26px)' : 'translateX(0px)'};

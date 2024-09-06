@@ -14,7 +14,7 @@ const Header: React.FC = () => {
         <img src={logo} alt="logo" />
       </Logo>
       <Nav>
-        <NavItem href="#home">Home</NavItem>
+        <NavItem href="#">Home</NavItem>
         <NavItem href="#timeline">Timeline</NavItem>
         <NavItem href="#bank-card">Bank card</NavItem>
         <NavItem href="#contact">Contact</NavItem>

@@ -22,7 +22,7 @@ const UpdatedStatus: React.FC = () => {
       </StatusDotPanel>
       <div>
         <p>
-          Last updated at {lastUpdated.getHours()}:{lastUpdated.getMinutes()}{' '}
+          Last updated at {lastUpdated.getHours()}:{lastUpdated.getMinutes()}
           {lastUpdated.getHours() <= 12 ? 'am' : 'pm'}
         </p>
       </div>

@@ -17,7 +17,7 @@ export interface CurrencyValue {
 
 export interface CurrencyPanelProps {
   item?: Currency;
-  value?: string;
+  value?: number;
   isCurrency?: boolean;
 }
 

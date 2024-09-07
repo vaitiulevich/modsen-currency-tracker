@@ -42,7 +42,7 @@ const ValuePanel: React.FC<CurrencyPanelProps> = ({
       <ConversionModal
         isOpen={modalIsOpen}
         onRequestClose={toggleModal}
-        conversionData={item}
+        conversionData={{ code: item.code, value }}
       />
       <ValuePanelContainer onClick={toggleModal}>
         <ValueIcon>
@@ -50,7 +50,7 @@ const ValuePanel: React.FC<CurrencyPanelProps> = ({
         </ValueIcon>
         <div>
           <CurrencyName>{item.name}</CurrencyName>
-          {value !== undefined && <p>{value}</p>}
+          {value !== undefined && <p>R${value.toFixed(2)}</p>}
         </div>
       </ValuePanelContainer>
     </>

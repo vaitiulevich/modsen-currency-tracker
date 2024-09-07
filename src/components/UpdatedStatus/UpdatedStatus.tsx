@@ -8,24 +8,33 @@ import {
   UpdatedContainer,
 } from './styled';
 const UpdatedStatus: React.FC = () => {
-  const lastUpdatedString = JSON.parse(
-    localStorage.getItem(`${URL_CURRENCY_API}${endPoints.latestCurrency}`) ||
-      'null',
-  ).meta.last_updated_at;
+  const storedData = localStorage.getItem(
+    `${URL_CURRENCY_API}${endPoints.latestCurrency}`,
+  );
+
+  const parsedData = storedData && JSON.parse(storedData).data;
+
+  const lastUpdatedString = parsedData?.meta?.last_updated_at;
+
   const lastUpdated = new Date(lastUpdatedString);
 
   return (
     <UpdatedContainer>
-      <StatusDotPanel>
-        <StatusDotShadow></StatusDotShadow>
-        <StatusDot></StatusDot>
-      </StatusDotPanel>
-      <div>
-        <p>
-          Last updated at {lastUpdated.getHours()}:{lastUpdated.getMinutes()}
-          {lastUpdated.getHours() <= 12 ? 'am' : 'pm'}
-        </p>
-      </div>
+      {lastUpdated && (
+        <>
+          <StatusDotPanel>
+            <StatusDotShadow></StatusDotShadow>
+            <StatusDot></StatusDot>
+          </StatusDotPanel>
+          <div>
+            <p>
+              Last updated at {lastUpdated.getUTCHours()}:
+              {lastUpdated.getUTCMinutes()}
+              {lastUpdated.getUTCHours() <= 12 ? 'am' : 'pm'}
+            </p>
+          </div>
+        </>
+      )}
     </UpdatedContainer>
   );
 };

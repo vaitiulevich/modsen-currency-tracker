@@ -1,11 +1,4 @@
-import {
-  ALL_CURRENCY,
-  endPoints,
-  EXCHANGE_API_KEY,
-  URL_EXCHANGE_API,
-} from '@constants/urls';
-import axios from 'axios';
-import { Currency } from 'interfaces/currency.inteface';
+import { ALL_CURRENCY, endPoints, URL_CURRENCY_API } from '@constants/urls';
 import React, { useEffect, useState } from 'react';
 
 import {
@@ -19,10 +12,15 @@ import {
   Overlay,
 } from './styled';
 
+interface ConversionProps {
+  code?: string;
+  value?: number;
+}
+
 interface ConversionModalProps {
   isOpen: boolean;
   onRequestClose: () => void;
-  conversionData: Currency | null;
+  conversionData: ConversionProps;
 }
 
 const ConversionModal: React.FC<ConversionModalProps> = ({
@@ -30,36 +28,51 @@ const ConversionModal: React.FC<ConversionModalProps> = ({
   onRequestClose,
   conversionData,
 }) => {
-  const [currencyExchange, setCurrencyExchange] = useState(ALL_CURRENCY[0]);
+  const storedData =
+    localStorage.getItem(URL_CURRENCY_API + endPoints.latestCurrency) ?? '{}';
+  const [AllCurrencyExchange, setAllCurrencyExchange] = useState(
+    JSON.parse(storedData),
+  );
   const [currencyAmount, setCurrencyAmount] = useState(1);
   const [resCurrencyExchange, setResCurrencyExchange] = useState<number | null>(
     null,
   );
-  const [error, setError] = useState<string | null>(null);
+  const [availableCurrencies, setAvailableCurrencies] = useState<string[]>([]);
+  const [currencyExchange, setCurrencyExchange] = useState<string>('');
 
-  if (!isOpen) return null;
+  useEffect(() => {
+    if (!isOpen) return;
 
-  const availableCurrencies = ALL_CURRENCY.filter(
-    (currency) => currency !== conversionData?.code,
-  );
-
-  const fetchExchangeRates = async () => {
-    if (!conversionData) return;
-
-    try {
-      const response = await axios.get(
-        `${URL_EXCHANGE_API}${EXCHANGE_API_KEY}${endPoints.exchange}/${conversionData.code}/${currencyExchange}/${currencyAmount}`,
-      );
-      setResCurrencyExchange(response.data.conversion_result);
-      setError(null);
-    } catch (err) {
-      setError('err');
+    const filteredCurrencies = ALL_CURRENCY.filter(
+      (currency) => currency !== conversionData?.code,
+    );
+    setAvailableCurrencies(filteredCurrencies);
+    if (filteredCurrencies.length > 0) {
+      setCurrencyExchange(filteredCurrencies[0]);
     }
+  }, [isOpen, conversionData]);
+
+  const onExchangeRates = async () => {
+    let finalAmount;
+
+    if (conversionData.code === 'USD') {
+      finalAmount =
+        +currencyAmount *
+        +AllCurrencyExchange.data.data[currencyExchange].value;
+    } else {
+      finalAmount =
+        (+currencyAmount / +(conversionData?.value ?? 1)) *
+        +AllCurrencyExchange.data.data[currencyExchange].value;
+    }
+
+    setResCurrencyExchange(finalAmount);
   };
 
   const onInputAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCurrencyAmount(+e.target.value);
   };
+
+  if (!isOpen) return null;
 
   return (
     <Overlay>
@@ -92,7 +105,7 @@ const ConversionModal: React.FC<ConversionModalProps> = ({
             type="number"
             min="0.01"
             step="0.01"
-            defaultValue={currencyAmount}
+            value={currencyAmount}
             onChange={onInputAmount}
           />
         </div>
@@ -102,12 +115,11 @@ const ConversionModal: React.FC<ConversionModalProps> = ({
           <p>{resCurrencyExchange?.toFixed(2) ?? 0}</p>
         </ConversionResult>
 
-        <CloseButton onClick={fetchExchangeRates}>Exchange</CloseButton>
+        <CloseButton onClick={onExchangeRates}>Exchange</CloseButton>
         <CloseButton
           onClick={() => {
             setCurrencyAmount(1);
             setResCurrencyExchange(null);
-            setError(null);
             onRequestClose();
           }}
         >

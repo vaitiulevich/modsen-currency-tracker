@@ -19,9 +19,11 @@ export const ALL_CURRENCY = [
 ];
 
 export const STOCKS_LIST = [
-  { id: 0, name: 'Bovespa Index', value: '0.15%', code: 'BVP' },
-  { id: 1, name: 'IFIX', value: '0.15%', code: 'IFIX' },
+  { id: 0, name: 'Bovespa Index', value: 0.15, code: 'BVP' },
+  { id: 1, name: 'IFIX', value: 0.15, code: 'IFIX' },
 ];
+
+export const FETCH_INTERVAL = 25000000;
 
 export const API_KEY = 'cur_live_QQoYQScj9JjCrJcNXuZCMPw6FFlKh2vEuG4e22Tm';
 export const EXCHANGE_API_KEY = 'e3480c87715d3ee3b5cc622c';

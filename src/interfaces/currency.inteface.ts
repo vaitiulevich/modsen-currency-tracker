@@ -10,6 +10,13 @@ export interface Currency {
   type?: string;
 }
 
+export interface LatestValuesData {
+  [key: string]: {
+    code: string;
+    value: number;
+  };
+}
+
 export interface CurrencyValue {
   code?: string;
   value?: number;

@@ -1,19 +1,13 @@
-import 'mapbox-gl/dist/mapbox-gl.css'; // Importing the CSS
+import 'mapbox-gl/dist/mapbox-gl.css';
 
+import { MAPBOX_TOKEN } from '@constants/urls';
+import { BankMapProps } from 'interfaces/banks.interface';
 import mapboxgl from 'mapbox-gl';
 import React from 'react';
 
-mapboxgl.accessToken =
-  'pk.eyJ1Ijoia2F0ZWthdGUwMyIsImEiOiJjbTBxbzdxZGQwMDVnMmlzYmYzOWY2bXVzIn0.gHTo5KsWLetooYvXZK0tsw'; // Замените на ваш токен
+import { MapBox } from './styled';
 
-interface Bank {
-  name: string;
-  coordinates: [number, number]; // [longitude, latitude]
-}
-
-interface BankMapProps {
-  banks: Bank[];
-}
+mapboxgl.accessToken = MAPBOX_TOKEN;
 
 class BankMap extends React.Component<BankMapProps> {
   private mapContainer: React.RefObject<HTMLDivElement>;
@@ -41,20 +35,16 @@ class BankMap extends React.Component<BankMapProps> {
     this.map = new mapboxgl.Map({
       container: this.mapContainer.current!,
       style: 'mapbox://styles/mapbox/streets-v11',
-      center: [27.55924, 53.90454], // Начальные координаты
+      center: [27.55924, 53.90454],
       zoom: 11,
     });
 
-    // Добавление маркеров при инициализации карты
     this.addMarkers();
   }
 
   addMarkers() {
-    // Удаляем старые маркеры
     this.markers.forEach((marker) => marker.remove());
     this.markers = [];
-
-    // Добавляем новые маркеры
     this.props.banks.forEach((bank) => {
       const marker = new mapboxgl.Marker()
         .setLngLat(bank.coordinates)
@@ -65,16 +55,11 @@ class BankMap extends React.Component<BankMapProps> {
   }
 
   updateMarkers() {
-    this.addMarkers(); // Просто добавляем маркеры заново
+    this.addMarkers();
   }
 
   render() {
-    return (
-      <div
-        ref={this.mapContainer}
-        style={{ width: '100%', height: '500px' }} // Установка размеров для карты
-      />
-    );
+    return <MapBox ref={this.mapContainer} />;
   }
 }
 

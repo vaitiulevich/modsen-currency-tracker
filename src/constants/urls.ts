@@ -1,5 +1,6 @@
+import { CurrencyName } from '@components/ValuePanel/styled';
+
 export const URL_CURRENCY_API = 'https://api.currencyapi.com/v3';
-export const URL_EXCHANGE_API = 'https://v6.exchangerate-api.com/v6/';
 
 export const endPoints = {
   latestCurrency: '/latest',
@@ -26,4 +27,5 @@ export const STOCKS_LIST = [
 export const FETCH_INTERVAL = 25000000;
 
 export const API_KEY = 'cur_live_QQoYQScj9JjCrJcNXuZCMPw6FFlKh2vEuG4e22Tm';
-export const EXCHANGE_API_KEY = 'e3480c87715d3ee3b5cc622c';
+export const MAPBOX_TOKEN =
+  'pk.eyJ1Ijoia2F0ZWthdGUwMyIsImEiOiJjbTBxbzdxZGQwMDVnMmlzYmYzOWY2bXVzIn0.gHTo5KsWLetooYvXZK0tsw';

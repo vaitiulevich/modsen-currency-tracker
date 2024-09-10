@@ -1,18 +1,32 @@
-import 'chartjs-chart-financial';
 import 'chartjs-adapter-date-fns';
 
-import { Chart, ChartOptions, registerables } from 'chart.js';
+import {
+  CategoryScale,
+  Chart as ChartJS,
+  ChartOptions,
+  LinearScale,
+  TimeScale,
+  Title,
+  Tooltip,
+} from 'chart.js';
 import {
   CandlestickController,
   CandlestickElement,
 } from 'chartjs-chart-financial';
-import React from 'react';
-import { Chart as TimelineChart } from 'react-chartjs-2';
+import React, { Component } from 'react';
+import { Chart } from 'react-chartjs-2';
 
-Chart.register(...registerables, CandlestickController, CandlestickElement);
-
-interface DataPoint {
-  t: number;
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  TimeScale,
+  Tooltip,
+  Title,
+  CandlestickController,
+  CandlestickElement,
+);
+interface FinanceProps {
+  x: Date;
   o: number;
   h: number;
   l: number;
@@ -20,87 +34,103 @@ interface DataPoint {
 }
 
 interface FinancialChartProps {
-  data: DataPoint[];
+  data: FinanceProps[];
 }
 
-interface FinancialChartState {
-  chartData: {
-    datasets: { data: DataPoint[]; backgroundColor: string }[];
-  };
-  options: ChartOptions<'candlestick'>;
-}
+class FinancialChart extends Component<FinancialChartProps> {
+  // chartRef = React.createRef<ChartJS<'candlestick'>>();
 
-class FinancialChart extends React.Component<
-  FinancialChartProps,
-  FinancialChartState
-> {
-  constructor(props: FinancialChartProps) {
-    super(props);
+  // componentDidUpdate(prevProps: FinancialChartProps) {
+  //   if (prevProps.data !== this.props.data) {
+  //     this.updateChart();
+  //   }
+  // }
 
-    this.state = {
-      chartData: {
-        datasets: [
-          {
-            data: props.data,
-            backgroundColor: 'rgba(0, 255, 0, 0.5)',
-          },
-        ],
+  // updateChart() {
+  //   const chartInstance = this.chartRef.current;
+
+  //   if (chartInstance) {
+  //     chartInstance.data.datasets[0].data = this.props.data.map((point) => ({
+  //       x: point.x.getTime(),
+  //       o: point.o,
+  //       h: point.h,
+  //       l: point.l,
+  //       c: point.c,
+  //     }));
+  //     chartInstance.update();
+  //   }
+  // }
+  render() {
+    const { data } = this.props;
+
+    const options: ChartOptions<'candlestick'> = {
+      responsive: true,
+      plugins: {
+        title: {
+          display: true,
+          text: 'Candlestick Chart Example',
+        },
+        tooltip: {
+          enabled: true,
+        },
       },
-      options: {
-        responsive: true,
-        scales: {
-          x: {
-            type: 'timeseries',
-            time: {
-              unit: 'day',
-            },
-            title: {
-              display: true,
-              text: 'DAY',
-            },
+      scales: {
+        x: {
+          type: 'time',
+          time: {
+            unit: 'day',
           },
-          y: {
-            type: 'linear',
-            title: {
-              display: true,
-              text: 'Value',
-            },
+          title: {
+            display: true,
+            text: 'Date',
+          },
+          min: new Date('2024-08-30').getTime(),
+          max: new Date('2024-09-30').getTime(),
+          ticks: {
+            autoSkip: true,
+            maxTicksLimit: 30,
           },
         },
-        plugins: {
-          legend: {
-            display: false,
+        y: {
+          title: {
+            display: true,
+            text: 'Value',
           },
         },
       },
     };
-  }
 
-  componentDidUpdate(prevProps: FinancialChartProps) {
-    if (prevProps.data !== this.props.data) {
-      this.setState({
-        chartData: {
-          datasets: [
-            {
-              data: this.props.data,
-              backgroundColor: 'rgba(0, 255, 0, 0.5)',
-            },
-          ],
-        },
-      });
-    }
-  }
+    const datasets = [
+      {
+        label: 'Stock Prices',
+        borderWidth: 1,
+        barThickness: 10,
+        backgroundColors: { up: '#16C782', down: '#EA3943' },
+        borderColors: { up: '#16C782', down: '#EA3943' },
+        data: data.map((point) => ({
+          x: point.x,
+          o: point.o,
+          h: point.h,
+          l: point.l,
+          c: point.c,
+        })),
+      },
+    ];
 
-  render() {
-    console.log(this.state.chartData);
-
+    console.log('fc', datasets);
     return (
       <div>
-        <TimelineChart
-          type="candlestick"
-          data={this.state.chartData}
-          options={this.state.options}
-        />
+        {data.length > 2 ? (
+          <Chart
+            type="candlestick"
+            data={{
+              datasets,
+            }}
+            options={options}
+          />
+        ) : (
+          <p>jj</p>
+        )}
       </div>
     );
   }

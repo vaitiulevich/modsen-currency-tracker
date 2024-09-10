@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
 import { ToggleContainer, ToggleInput, ToggleSlider } from './styled';
@@ -14,6 +15,11 @@ const ToggleSwitch: React.FC<ToggleSwitchProps> = ({ checked, onChange }) => {
       <ToggleSlider checked={checked} />
     </ToggleContainer>
   );
+};
+
+ToggleSwitch.propTypes = {
+  checked: PropTypes.bool.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 export default ToggleSwitch;

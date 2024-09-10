@@ -1,117 +1,77 @@
 import BankMap from '@components/BankMap/BankMap';
+import CurrencySearch from '@components/CurrencySearch/CurrencySearch';
+import { allBanks } from '@constants/banks';
+import { CurrencyContext, CurrencyContextType } from '@store/CurrencyContext';
+import { BankCardState } from 'interfaces/banks.interface';
+import { Currency } from 'interfaces/currency.inteface';
 import React from 'react';
 
-import { BankCardContainer } from './styled';
-
-interface Bank {
-  name: string;
-  coordinates: [number, number]; // [долгота, широта]
-}
-// interface Bank {
-//   name: string;
-//   coordinates: { lat: number; lng: number };
-// }
-
-interface BankCoordinates {
-  lat: number;
-  lng: number;
-}
-
-interface BankState {
-  bankName: string;
-  city: string;
-  coordinates: BankCoordinates[];
-  error: string | null;
-}
-interface AppState {
-  banks: Bank[];
-  // currentBank: BankState;
-}
-
-class BankCard extends React.Component<{}, AppState> {
+class BankCard extends React.Component<{}, BankCardState> {
+  static contextType = CurrencyContext;
+  context!: CurrencyContextType;
   constructor(props: {}) {
     super(props);
     this.state = {
-      banks: [
-        // { name: 'Беларусбанк', coordinates: [27.5581, 53.9045] },
-        // { name: 'Приорбанк', coordinates: [27.554, 53.906] },
-        // { name: 'БПС-Сбербанк', coordinates: [27.563, 53.9065] },
-        // { name: 'Альфа-Банк', coordinates: [27.561, 53.903] },
-        // { name: 'Технобанк', coordinates: [27.57, 53.91] },
-      ],
-      // currentBank: {
-      // bankName: 'Беларусбанк',
-      // city: 'Минск',
-      // coordinates: [],
-      // error: null,
-      // },
+      banks: allBanks,
+      searchTerm: '',
+      filteredBanks: [],
+      searcebleCurrency: [],
     };
   }
-  // mapboxgl.accessToken =
-  // 'pk.eyJ1Ijoia2F0ZWthdGUwMyIsImEiOiJjbTBxbzdxZGQwMDVnMmlzYmYzOWY2bXVzIn0.gHTo5KsWLetooYvXZK0tsw';
+  componentDidMount() {
+    this.setState((prevState) => ({
+      ...prevState,
+      filteredBanks: this.state.banks,
+    }));
+  }
 
-  getCoordinates = async (address: string) => {
-    const accessToken =
-      'pk.eyJ1Ijoia2F0ZWthdGUwMyIsImEiOiJjbTBxbzdxZGQwMDVnMmlzYmYzOWY2bXVzIn0.gHTo5KsWLetooYvXZK0tsw'; // Замените на ваш токен
-    try {
-      console.log(encodeURIComponent(address));
-      const response = await fetch(
-        `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(address)}.json?access_token=${accessToken}`,
-      );
+  handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const searchTerm = event.target.value.toLowerCase().trim();
+    this.setState((prevState) => ({
+      ...prevState,
+      searchTerm,
+    }));
+    const { currencyList } = this.context;
 
-      if (!response.ok) {
-        throw new Error('Ошибка при получении данных');
-      }
+    const searcebleCurrency = currencyList.filter(
+      (currency) =>
+        currency.name?.toLowerCase().includes(searchTerm) ||
+        currency.code?.toLowerCase().includes(searchTerm),
+    );
 
-      const data = await response.json();
-      if (data.features.length > 0) {
-        const newCoordinates = data.features.map((feature: any) => ({
-          name: address,
-          coordinates: [
-            feature.geometry.coordinates[0],
-            feature.geometry.coordinates[1],
-          ],
-        }));
-        // console.log(newCoordinates);
-
-        // this.state = {
-        //   banks: [...this.state.banks, ...newCoordinates],
-        // };
-        this.setState((prevState) => ({
-          banks: [...prevState.banks, ...newCoordinates],
-          error: null,
-        }));
-        // this.setState({ coordinates, error: null });
-      } else {
-        throw new Error('Адрес не найден');
-      }
-      // console.log(this.state);
-    } catch (error) {
-      console.log(error);
-      // this.setState({ error: error.message, coordinates: null });
-    }
+    this.setState((prevState) => ({
+      ...prevState,
+      searcebleCurrency,
+    }));
   };
 
-  handleSearch = () => {
-    const bankName = 'Belarusbank';
-    this.getCoordinates(`Belarusbank, Minsk`);
-    this.getCoordinates(`Priorbank, Minsk`);
-    // this.getCoordinates(`Технобанк, Minsk`);
-    console.log(this.state.banks);
+  onSetCurrency = (currency: Currency) => {
+    const code = currency.code || this.state.searchTerm;
+
+    const filteredBanks = allBanks.filter(
+      (bank) =>
+        bank.name.toLowerCase().includes(code.toLowerCase()) ||
+        bank.currency.some((curr) =>
+          curr.toLowerCase().includes(code.toLowerCase()),
+        ),
+    );
+    this.setState((prevState) => ({
+      ...prevState,
+      banks: filteredBanks,
+    }));
   };
 
   render() {
-    // console.log(this.state.banks);
+    const { searchTerm } = this.state;
     return (
       <div>
-        <BankCardContainer>
-          <div>
-            <button onClick={this.handleSearch}>ff</button>
-            <h2>Search currency in the bank</h2>
-            <input placeholder="Сurrency search..." />
-          </div>
-        </BankCardContainer>
-        {/* <BankMap banks={this.state.banks} /> */}
+        <CurrencySearch
+          searchTerm={searchTerm}
+          searcebleCurrency={this.state.searcebleCurrency}
+          onSearch={this.handleSearch}
+          onSelectCurrency={this.onSetCurrency}
+        />
+        <BankMap banks={this.state.banks} />
       </div>
     );
   }

@@ -1,4 +1,5 @@
 import { endPoints, URL_CURRENCY_API } from '@constants/urls';
+import { useCurrencyContext } from '@store/CurrencyContext';
 import React from 'react';
 
 import {
@@ -8,14 +9,7 @@ import {
   UpdatedContainer,
 } from './styled';
 const UpdatedStatus: React.FC = () => {
-  const storedData = localStorage.getItem(
-    `${URL_CURRENCY_API}${endPoints.latestCurrency}`,
-  );
-
-  const parsedData = storedData && JSON.parse(storedData).data;
-
-  const lastUpdatedString = parsedData?.meta?.last_updated_at;
-
+  const lastUpdatedString = useCurrencyContext().lastUpdated.last_updated_at;
   const lastUpdated = new Date(lastUpdatedString);
 
   return (
@@ -27,11 +21,15 @@ const UpdatedStatus: React.FC = () => {
             <StatusDot></StatusDot>
           </StatusDotPanel>
           <div>
-            <p>
-              Last updated at {lastUpdated.getUTCHours()}:
-              {lastUpdated.getUTCMinutes()}
-              {lastUpdated.getUTCHours() <= 12 ? 'am' : 'pm'}
-            </p>
+            {lastUpdated ? (
+              <p>
+                Last updated at {lastUpdated.getUTCHours()}:
+                {lastUpdated.getUTCMinutes()}
+                {lastUpdated.getUTCHours() <= 12 ? 'am' : 'pm'}
+              </p>
+            ) : (
+              <p>Not updated yet</p>
+            )}
           </div>
         </>
       )}

@@ -1,5 +1,6 @@
 import ConversionModal from '@components/Modal/Modal';
 import { CurrencyPanelProps } from 'interfaces/currency.inteface';
+import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 
 import { CurrencyName, ValueIcon, ValuePanelContainer } from './styled';
@@ -42,7 +43,7 @@ const ValuePanel: React.FC<CurrencyPanelProps> = ({
       <ConversionModal
         isOpen={modalIsOpen}
         onRequestClose={toggleModal}
-        conversionData={{ code: item.code, value }}
+        conversionData={{ code: item.code ?? '', value }}
       />
       <ValuePanelContainer onClick={toggleModal}>
         <ValueIcon>
@@ -55,6 +56,15 @@ const ValuePanel: React.FC<CurrencyPanelProps> = ({
       </ValuePanelContainer>
     </>
   );
+};
+
+ValuePanel.propTypes = {
+  item: PropTypes.shape({
+    code: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+  }),
+  value: PropTypes.number.isRequired,
+  isCurrency: PropTypes.bool.isRequired,
 };
 
 export default ValuePanel;

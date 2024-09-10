@@ -1,4 +1,6 @@
 import { ALL_CURRENCY, endPoints, URL_CURRENCY_API } from '@constants/urls';
+import { ConversionModalProps } from 'interfaces/convirsation.interface';
+import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 
 import {
@@ -11,17 +13,6 @@ import {
   ModalTitle,
   Overlay,
 } from './styled';
-
-interface ConversionProps {
-  code?: string;
-  value?: number;
-}
-
-interface ConversionModalProps {
-  isOpen: boolean;
-  onRequestClose: () => void;
-  conversionData: ConversionProps;
-}
 
 const ConversionModal: React.FC<ConversionModalProps> = ({
   isOpen,
@@ -105,14 +96,14 @@ const ConversionModal: React.FC<ConversionModalProps> = ({
             type="number"
             min="0.01"
             step="0.01"
-            value={currencyAmount}
+            defaultValue={currencyAmount}
             onChange={onInputAmount}
           />
         </div>
 
         <ConversionResult>
           <p>Currency conversion result:</p>
-          <p>{resCurrencyExchange?.toFixed(2) ?? 0}</p>
+          <p>{resCurrencyExchange?.toFixed(7) ?? 0}</p>
         </ConversionResult>
 
         <CloseButton onClick={onExchangeRates}>Exchange</CloseButton>
@@ -128,6 +119,15 @@ const ConversionModal: React.FC<ConversionModalProps> = ({
       </ModalContent>
     </Overlay>
   );
+};
+
+ConversionModal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onRequestClose: PropTypes.func.isRequired,
+  conversionData: PropTypes.shape({
+    code: PropTypes.string.isRequired,
+    value: PropTypes.number.isRequired,
+  }).isRequired,
 };
 
 export default ConversionModal;

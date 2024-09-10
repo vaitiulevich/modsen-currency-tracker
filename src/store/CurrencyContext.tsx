@@ -1,5 +1,5 @@
+import { ALL_CURRENCY } from '@constants/currency';
 import {
-  ALL_CURRENCY,
   API_KEY,
   endPoints,
   FETCH_INTERVAL,

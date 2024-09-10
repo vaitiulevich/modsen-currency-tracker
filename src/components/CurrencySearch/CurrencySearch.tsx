@@ -1,4 +1,5 @@
-import searchIcon from '@assets/icons/searchIcon.svg';
+import { images } from '@constants/images';
+import { SearchInputPlaceholder } from '@constants/messages';
 import { CurrencySearchProps } from 'interfaces/banks.interface';
 import { Currency } from 'interfaces/currency.inteface';
 import React, { Component } from 'react';
@@ -44,14 +45,14 @@ class CurrencySearch extends Component<
         <SearchTitle>Search currency in the bank</SearchTitle>
         <SearchInputPanel>
           <SearchInput
-            placeholder="Сurrency search..."
+            placeholder={SearchInputPlaceholder}
             value={searchTerm}
             onChange={onSearch}
             onFocus={() => this.setState({ isFocused: true })}
             onBlur={this.handleBlur}
           />
           <SearchButton>
-            <img src={searchIcon} alt="search" />
+            <img src={images.searchIcon} alt="search" />
           </SearchButton>
         </SearchInputPanel>
         {isFocused && searcebleCurrency.length > 0 && (

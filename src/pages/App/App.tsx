@@ -1,3 +1,4 @@
+import ErrorBoundary from '@components/ErrorBoundary/ErrorBoundary';
 import Footer from '@components/Footer/Footer';
 import Header from '@components/Header/Header';
 import Hero from '@components/Hero/Hero';
@@ -14,15 +15,17 @@ function App() {
     <ThemeProvider>
       <CurrencyProvider>
         <TimelineProvider>
-          <AppComponent>
-            <GlobalStyle />
-            <Header />
-            <Hero />
-            <main>
-              <Outlet />
-            </main>
-            <Footer />
-          </AppComponent>
+          <ErrorBoundary>
+            <AppComponent>
+              <GlobalStyle />
+              <Header />
+              <Hero />
+              <main>
+                <Outlet />
+              </main>
+              <Footer />
+            </AppComponent>
+          </ErrorBoundary>
         </TimelineProvider>
       </CurrencyProvider>
     </ThemeProvider>

@@ -1,5 +1,6 @@
 import logo from '@assets/logo.svg';
 import ToggleSwitch from '@components/ToggleSwitch/ToggleSwitch';
+import { images } from '@constants/images';
 import { useTheme } from '@utils/hooks/useTheme';
 import React from 'react';
 
@@ -11,7 +12,7 @@ const Header: React.FC = () => {
   return (
     <HeaderContainer>
       <Logo>
-        <img src={logo} alt="logo" />
+        <img src={images.logo} alt="logo" />
       </Logo>
       <Nav>
         <NavItem href="#">Home</NavItem>

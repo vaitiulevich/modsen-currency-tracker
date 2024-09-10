@@ -71,7 +71,7 @@ class BankCard extends React.Component<{}, BankCardState> {
           onSearch={this.handleSearch}
           onSelectCurrency={this.onSetCurrency}
         />
-        <BankMap banks={this.state.banks} />
+        {/* <BankMap banks={this.state.banks} /> */}
       </div>
     );
   }

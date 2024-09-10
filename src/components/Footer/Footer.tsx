@@ -1,4 +1,5 @@
 import logo from '@assets/logo.svg';
+import { images } from '@constants/images';
 import React from 'react';
 
 import {
@@ -21,7 +22,7 @@ const Footer: React.FC = () => {
         <FooterContent>
           <LogoHeadline>
             <Logo>
-              <img src={logo} alt="logo" />
+              <img src={images.logo} alt="logo" />
             </Logo>
             <LogoTitle>Modsen Currency Tracker</LogoTitle>
           </LogoHeadline>

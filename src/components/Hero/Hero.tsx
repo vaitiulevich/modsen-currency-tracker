@@ -1,6 +1,5 @@
-import logo from '@assets/logo.svg';
 import UpdatedStatus from '@components/UpdatedStatus/UpdatedStatus';
-import axios from 'axios';
+import { images } from '@constants/images';
 import React from 'react';
 
 import {
@@ -25,7 +24,7 @@ const Hero: React.FC = () => {
           </HeroSubtitle>
         </HeroContent>
         <HeroLogo>
-          <img src={logo} alt="logo" />
+          <img src={images.logo} alt="logo" />
         </HeroLogo>
       </HeroContainer>
       <UpdatedStatus />

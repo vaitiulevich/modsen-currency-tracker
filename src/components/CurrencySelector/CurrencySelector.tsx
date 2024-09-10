@@ -1,5 +1,5 @@
 import url from '@assets/icons/CNY.svg';
-import { ALL_CURRENCY } from '@constants/urls';
+import { ALL_CURRENCY } from '@constants/currency';
 import React from 'react';
 
 interface CurrencySelectorProps {

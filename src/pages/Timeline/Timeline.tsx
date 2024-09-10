@@ -7,7 +7,7 @@ import CandlestickChart from '@components/FinancialChart/CandlestickChart';
 import FinancialChart from '@components/FinancialChart/FinancialChart';
 import TimelineForm from '@components/TimelineForm/TimelineForm';
 import { contacts } from '@constants/contacts';
-import { ALL_CURRENCY } from '@constants/urls';
+import { ALL_CURRENCY } from '@constants/currency';
 import {
   TimelineContextType,
   useTimelineContext,

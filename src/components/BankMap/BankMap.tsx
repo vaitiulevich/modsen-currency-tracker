@@ -1,5 +1,6 @@
 import 'mapbox-gl/dist/mapbox-gl.css';
 
+import { MAPBOX_STYLES, MAPBOX_ZOOM } from '@constants/map';
 import { MAPBOX_TOKEN } from '@constants/urls';
 import { BankMapProps } from 'interfaces/banks.interface';
 import mapboxgl from 'mapbox-gl';
@@ -34,9 +35,9 @@ class BankMap extends React.Component<BankMapProps> {
   initializeMap() {
     this.map = new mapboxgl.Map({
       container: this.mapContainer.current!,
-      style: 'mapbox://styles/mapbox/streets-v11',
+      style: MAPBOX_STYLES,
       center: [27.55924, 53.90454],
-      zoom: 11,
+      zoom: MAPBOX_ZOOM,
     });
 
     this.addMarkers();

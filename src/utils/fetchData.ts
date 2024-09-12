@@ -1,10 +1,15 @@
 import { FETCH_INTERVAL } from '@constants/urls';
 import axios, { AxiosError } from 'axios';
+import PropTypes, { string } from 'prop-types';
+
+interface headrsProps {
+  [key: string]: string;
+}
 
 const fetchData = async (
   url: string,
   params: Record<string, any>,
-  apiKey: string,
+  headers: headrsProps,
   isInterval: boolean = false,
   cacheDuration: number = FETCH_INTERVAL,
 ): Promise<any> => {
@@ -26,9 +31,7 @@ const fetchData = async (
   try {
     const response = await axios.get(url, {
       params,
-      headers: {
-        apikey: apiKey,
-      },
+      headers,
     });
     localStorage.setItem(
       cacheKey,
@@ -38,6 +41,14 @@ const fetchData = async (
   } catch (error) {
     throw error as AxiosError;
   }
+};
+
+fetchData.propType = {
+  url: PropTypes.string.isRequired,
+  params: PropTypes.object.isRequired,
+  headers: PropTypes.object.isRequired,
+  isInterval: PropTypes.bool,
+  cacheDuration: PropTypes.number,
 };
 
 export default fetchData;

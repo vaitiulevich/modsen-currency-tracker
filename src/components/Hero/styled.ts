@@ -16,7 +16,8 @@ export const HeroHeadline = styled.h1`
     font-size: ${(props) => props.theme.typography.fontSize.large};
   }
   @media (max-width: ${breakpoints.mobile}px) {
-    margin-right: 0.5rem;
+    margin: 0;
+    text-align: center;
   }
 `;
 
@@ -42,7 +43,7 @@ export const HeroLogo = styled.div`
     height: 15rem;
   }
   @media (max-width: ${breakpoints.mobile}px) {
-    height: 10rem;
+    display: none;
   }
 `;
 
@@ -51,6 +52,10 @@ export const HeroContent = styled.div`
   flex-direction: column;
   align-items: flex-end;
   justify-content: space-between;
+
+  @media (max-width: ${breakpoints.mobile}px) {
+    align-items: center;
+  }
 `;
 
 export const HeroSubtitle = styled.div`

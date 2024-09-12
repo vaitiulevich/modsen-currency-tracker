@@ -52,13 +52,20 @@ export const CurrencyProvider: React.FC<{ children: React.ReactNode }> = ({
     [],
   );
 
+  const headers = useMemo(
+    () => ({
+      apikey: API_KEY,
+    }),
+    [],
+  );
+
   const fetchCurrencyData = useCallback(async () => {
     setLoading(true);
     try {
       const data = await fetchData(
         URL_CURRENCY_API + endPoints.allCurrencies,
         params,
-        API_KEY,
+        headers,
         false,
       );
       setCurrencyList(Object.values(data.data));
@@ -75,7 +82,7 @@ export const CurrencyProvider: React.FC<{ children: React.ReactNode }> = ({
       const data = await fetchData(
         URL_CURRENCY_API + endPoints.latestCurrency,
         params,
-        API_KEY,
+        headers,
         true,
       );
       setValuesList(data.data);

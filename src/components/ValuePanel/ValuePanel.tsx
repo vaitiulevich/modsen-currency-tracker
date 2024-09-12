@@ -1,4 +1,7 @@
-import ConversionModal from '@components/Modal/Modal';
+import ConversionModal from '@components/ConversionModal/ConversionModal';
+import Loader from '@components/Loader/Loader';
+import { images } from '@constants/images';
+import useLoadImage from '@utils/hooks/useLoadImage';
 import { CurrencyPanelProps } from 'interfaces/currency.inteface';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
@@ -10,33 +13,37 @@ const ValuePanel: React.FC<CurrencyPanelProps> = ({
   value,
   isCurrency,
 }) => {
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
+  if (!item) {
+    return <div>No currency data available.</div>;
+  }
+
+  // const imageUrl = loadImage(item?.code);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const { imageUrl } = useLoadImage(item?.code);
 
-  useEffect(() => {
-    const loadImage = async () => {
-      if (item) {
-        try {
-          const imageModule = await import(`@assets/icons/${item.code}.svg`);
-          setImageUrl(imageModule.default);
-        } catch (error) {
-          console.error('Error loading image:', error);
-        }
-      }
-    };
+  // useEffect(() => {
+  // const loadImage = async () => {
+  //   if (item) {
+  //     try {
+  //       const imageModule = await import(`@assets/icons/${item.code}.svg`);
+  //       return imageModule.default
+  //     } catch (error) {
+  //       console.error('Error loading image:', error);
+  //     }
+  //   }
+  // };
+  // setImageUrl(imageModule.default);
 
-    loadImage();
-  }, [item]);
+  // loadImage();
+  // }, []);
+
+  console.log(imageUrl);
 
   const toggleModal = () => {
     if (isCurrency) {
       setModalIsOpen((prev) => !prev);
     }
   };
-
-  if (!item) {
-    return <div>No currency data available.</div>;
-  }
 
   return (
     <>
@@ -47,7 +54,7 @@ const ValuePanel: React.FC<CurrencyPanelProps> = ({
       />
       <ValuePanelContainer onClick={toggleModal}>
         <ValueIcon>
-          {imageUrl ? <img src={imageUrl} alt={item.name} /> : 'Loading...'}
+          {imageUrl ? <img src={imageUrl} alt={item.name} /> : <Loader />}
         </ValueIcon>
         <div>
           <CurrencyName>{item.name}</CurrencyName>

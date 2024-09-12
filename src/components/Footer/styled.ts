@@ -21,6 +21,9 @@ export const FooterContainer = styled.footer`
 
 export const FooterContent = styled.div`
   width: 35%;
+  @media (max-width: ${breakpoints.mobile}px) {
+    width: auto;
+  }
 `;
 
 export const Logo = styled.div``;
@@ -43,6 +46,10 @@ export const LogoHeadline = styled.div`
 export const TopFooter = styled.div`
   display: flex;
   justify-content: space-between;
+
+  @media (max-width: ${breakpoints.mobile}px) {
+    flex-direction: column;
+  }
 `;
 
 export const LinksContainer = styled.div`
@@ -50,6 +57,9 @@ export const LinksContainer = styled.div`
   justify-content: space-between;
   width: 50%;
   max-width: 1200px;
+  @media (max-width: ${breakpoints.mobile}px) {
+    width: auto;
+  }
 `;
 
 export const Column = styled.div`

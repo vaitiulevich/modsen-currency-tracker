@@ -1,5 +1,9 @@
 import 'chartjs-adapter-date-fns';
 
+import Loader from '@components/Loader/Loader';
+import TimlineModal from '@components/TimlineModal/TimlineModal';
+import { CHART_TITLE, CHART_X_TITLE, CHART_Y_TITLE } from '@constants/messages';
+import TimelineContext, { timelineColors } from '@store/TimelineContext';
 import {
   CategoryScale,
   Chart as ChartJS,
@@ -13,6 +17,10 @@ import {
   CandlestickController,
   CandlestickElement,
 } from 'chartjs-chart-financial';
+import {
+  FinancialChartProps,
+  TimelineContextType,
+} from 'interfaces/timeline.interface';
 import React, { Component } from 'react';
 import { Chart } from 'react-chartjs-2';
 
@@ -25,50 +33,38 @@ ChartJS.register(
   CandlestickController,
   CandlestickElement,
 );
-interface FinanceProps {
-  x: Date;
-  o: number;
-  h: number;
-  l: number;
-  c: number;
-}
-
-interface FinancialChartProps {
-  data: FinanceProps[];
-}
 
 class FinancialChart extends Component<FinancialChartProps> {
-  // chartRef = React.createRef<ChartJS<'candlestick'>>();
+  static contextType = TimelineContext;
+  context!: TimelineContextType;
 
-  // componentDidUpdate(prevProps: FinancialChartProps) {
-  //   if (prevProps.data !== this.props.data) {
-  //     this.updateChart();
-  //   }
-  // }
+  state = {
+    isModalOpen: false,
+    currentFinance: this.context.currentFinance,
+  };
+  componentDidUpdate(prevProps: FinancialChartProps) {
+    if (prevProps.data !== this.props.data) {
+      this.setState({ currentFinance: this.context.currentFinance });
+    }
+  }
 
-  // updateChart() {
-  //   const chartInstance = this.chartRef.current;
+  openModal = () => {
+    this.setState({ isModalOpen: true });
+  };
 
-  //   if (chartInstance) {
-  //     chartInstance.data.datasets[0].data = this.props.data.map((point) => ({
-  //       x: point.x.getTime(),
-  //       o: point.o,
-  //       h: point.h,
-  //       l: point.l,
-  //       c: point.c,
-  //     }));
-  //     chartInstance.update();
-  //   }
-  // }
+  closeModal = () => {
+    this.setState({ isModalOpen: false });
+  };
+
   render() {
-    const { data } = this.props;
+    const { data, dateMin, dateMax } = this.props;
 
     const options: ChartOptions<'candlestick'> = {
       responsive: true,
       plugins: {
         title: {
           display: true,
-          text: 'Candlestick Chart Example',
+          text: CHART_TITLE,
         },
         tooltip: {
           enabled: true,
@@ -82,10 +78,10 @@ class FinancialChart extends Component<FinancialChartProps> {
           },
           title: {
             display: true,
-            text: 'Date',
+            text: CHART_X_TITLE,
           },
-          min: new Date('2024-08-30').getTime(),
-          max: new Date('2024-09-30').getTime(),
+          min: dateMin,
+          max: dateMax,
           ticks: {
             autoSkip: true,
             maxTicksLimit: 30,
@@ -94,7 +90,7 @@ class FinancialChart extends Component<FinancialChartProps> {
         y: {
           title: {
             display: true,
-            text: 'Value',
+            text: CHART_Y_TITLE,
           },
         },
       },
@@ -102,34 +98,67 @@ class FinancialChart extends Component<FinancialChartProps> {
 
     const datasets = [
       {
-        label: 'Stock Prices',
         borderWidth: 1,
         barThickness: 10,
-        backgroundColors: { up: '#16C782', down: '#EA3943' },
-        borderColors: { up: '#16C782', down: '#EA3943' },
-        data: data.map((point) => ({
-          x: point.x,
-          o: point.o,
-          h: point.h,
-          l: point.l,
-          c: point.c,
-        })),
+        backgroundColors: timelineColors,
+        borderColors: timelineColors,
+        data: data,
       },
     ];
 
-    console.log('fc', datasets);
+    const handleClick = (event: React.MouseEvent<HTMLCanvasElement>) => {
+      const chart = ChartJS.getChart(
+        event.nativeEvent.target as HTMLCanvasElement,
+      );
+
+      if (!chart) {
+        return;
+      }
+
+      const points = chart.getElementsAtEventForMode(
+        event.nativeEvent,
+        'nearest',
+        { intersect: true },
+        false,
+      );
+
+      if (points.length) {
+        const firstPoint = points[0];
+        const datasetIndex = firstPoint.datasetIndex;
+        const dataIndex = firstPoint.index;
+
+        const clickedData = datasets[datasetIndex].data[dataIndex];
+
+        this.context.onSetCurrentFinance({
+          x: clickedData.x,
+          o: clickedData.o,
+          h: clickedData.h,
+          l: clickedData.l,
+          c: clickedData.c,
+        });
+        this.setState({
+          isModalOpen: true,
+        });
+      }
+    };
+
     return (
       <div>
+        <TimlineModal
+          isOpen={this.state.isModalOpen}
+          onClose={this.closeModal}
+        />
         {data.length > 2 ? (
           <Chart
             type="candlestick"
             data={{
               datasets,
             }}
+            onClick={handleClick}
             options={options}
           />
         ) : (
-          <p>jj</p>
+          <Loader />
         )}
       </div>
     );

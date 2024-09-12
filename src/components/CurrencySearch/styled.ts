@@ -53,6 +53,10 @@ export const CurrencyList = styled.ul`
   position: absolute;
   top: 7.5rem;
   z-index: 10;
+
+  @media (max-width: ${breakpoints.mobile}px) {
+    top: 10.5rem;
+  }
 `;
 export const CurrencyListItem = styled.li`
   padding: 0.4rem;

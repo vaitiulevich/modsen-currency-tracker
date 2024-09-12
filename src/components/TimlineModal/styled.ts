@@ -13,6 +13,12 @@ export const Overlay = styled.div`
   align-items: center;
 `;
 
+export const ModalHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
 export const ModalContent = styled.div`
   background: ${(props) => props.theme.colors.modalFill};
   backdrop-filter: blur(5px);

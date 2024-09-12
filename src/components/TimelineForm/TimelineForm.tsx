@@ -8,6 +8,13 @@ import {
 } from 'interfaces/timeline.interface';
 import React, { Component } from 'react';
 
+import {
+  FormCurrency,
+  FormCurrencyInpPanel,
+  FormCurrencyInput,
+  SubmitButton,
+} from './styled';
+
 class TimelineForm extends Component<TimelineFormProps, TimelineFormState> {
   static contextType = TimelineContext;
   context!: TimelineContextType;
@@ -37,23 +44,26 @@ class TimelineForm extends Component<TimelineFormProps, TimelineFormState> {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <FormCurrency onSubmit={this.handleSubmit}>
         {timelineFormFields.map((field) => (
-          <input
-            readOnly={field.readonly}
-            key={field.name}
-            type={field.type}
-            name={field.name}
-            placeholder={field.placeholder}
-            defaultValue={
-              this.state.timelineData[field.name as keyof TimelineData] + ''
-            }
-            onChange={this.handleChange}
-            required={field.required}
-          />
+          <FormCurrencyInpPanel>
+            <label>{field.fulltitle}</label>
+            <FormCurrencyInput
+              readOnly={field.readonly}
+              key={field.name}
+              type={field.type}
+              name={field.name}
+              placeholder={field.fulltitle}
+              defaultValue={
+                this.state.timelineData[field.name as keyof TimelineData] + ''
+              }
+              onChange={this.handleChange}
+              required={field.required}
+            />
+          </FormCurrencyInpPanel>
         ))}
-        <button type="submit">Add Data</button>
-      </form>
+        <SubmitButton type="submit">Change</SubmitButton>
+      </FormCurrency>
     );
   }
 }

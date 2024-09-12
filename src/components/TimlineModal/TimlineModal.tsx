@@ -9,6 +9,7 @@ import {
   ConversionCurencyPanel,
   ConversionResult,
   ModalContent,
+  ModalHeader,
   ModalInput,
   ModalSelect,
   ModalTitle,
@@ -47,10 +48,12 @@ const TimlineModal: React.FC<TimelineModalProps> = ({ isOpen, onClose }) => {
   return (
     <Overlay>
       <ModalContent>
-        <ModalTitle>Currency Exchange</ModalTitle>
+        <ModalHeader>
+          <ModalTitle>Change OHLCV</ModalTitle>
+          <CloseButton onClick={onClose}>Close</CloseButton>
+        </ModalHeader>
+
         <TimelineForm onSubmit={onSubmit} currentFinance={currentFinance} />
-        <CloseButton>Exchange</CloseButton>
-        <CloseButton onClick={onClose}>Close</CloseButton>
       </ModalContent>
     </Overlay>
   );

@@ -34,6 +34,7 @@ const Home: React.FC = () => {
             item={item}
             value={+item.value}
             isCurrency={false}
+            type="stocks"
           />
         ))}
       </AllCurrencyContainer>
@@ -45,6 +46,7 @@ const Home: React.FC = () => {
             item={item}
             value={valuesList && item.code ? valuesList[item.code].value : 0}
             isCurrency={true}
+            type="quotes"
           />
         ))}
       </AllCurrencyContainer>

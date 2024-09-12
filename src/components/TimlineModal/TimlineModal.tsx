@@ -37,7 +37,6 @@ const TimlineModal: React.FC<TimelineModalProps> = ({ isOpen, onClose }) => {
     candlestickData: FinanceProps,
   ) => {
     e.preventDefault();
-    console.log(candlestickData);
     addData(candlestickData);
   };
 

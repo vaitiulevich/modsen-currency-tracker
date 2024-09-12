@@ -12,32 +12,14 @@ const ValuePanel: React.FC<CurrencyPanelProps> = ({
   item,
   value,
   isCurrency,
+  type,
 }) => {
   if (!item) {
     return <div>No currency data available.</div>;
   }
 
-  // const imageUrl = loadImage(item?.code);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const { imageUrl } = useLoadImage(item?.code);
-
-  // useEffect(() => {
-  // const loadImage = async () => {
-  //   if (item) {
-  //     try {
-  //       const imageModule = await import(`@assets/icons/${item.code}.svg`);
-  //       return imageModule.default
-  //     } catch (error) {
-  //       console.error('Error loading image:', error);
-  //     }
-  //   }
-  // };
-  // setImageUrl(imageModule.default);
-
-  // loadImage();
-  // }, []);
-
-  console.log(imageUrl);
 
   const toggleModal = () => {
     if (isCurrency) {
@@ -58,7 +40,13 @@ const ValuePanel: React.FC<CurrencyPanelProps> = ({
         </ValueIcon>
         <div>
           <CurrencyName>{item.name}</CurrencyName>
-          {value !== undefined && <p>R${value.toFixed(2)}</p>}
+          {value && (
+            <p>
+              {type === 'quotes' && 'R$'}
+              {value.toFixed(2)}
+              {type === 'stocks' && '%'}
+            </p>
+          )}
         </div>
       </ValuePanelContainer>
     </>

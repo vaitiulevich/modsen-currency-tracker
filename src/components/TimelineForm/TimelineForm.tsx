@@ -26,10 +26,6 @@ class TimelineForm extends Component<TimelineFormProps, TimelineFormState> {
     };
   }
 
-  componentDidMount() {
-    console.log(this.props.currentFinance);
-  }
-
   handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     this.setState((prevState) => ({

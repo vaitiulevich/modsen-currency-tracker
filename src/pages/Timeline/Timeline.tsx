@@ -42,7 +42,7 @@ class Timeline extends React.Component<{}, TimelineChartState> {
 
   componentDidMount() {
     notificationService.subscribe(this.onShowNotification);
-    this.onFetchCurrencyData('EUR');
+    this.onFetchCurrencyData('ARS');
   }
 
   componentWillUnmount() {

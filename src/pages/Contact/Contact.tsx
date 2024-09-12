@@ -1,6 +1,6 @@
+import React from 'react';
 import ContactCard from '@components/ContactCard/ContactCard';
 import { contacts } from '@constants/contacts';
-import React from 'react';
 
 import { ContactContainer, ContactList, ContactTitle } from './styled';
 

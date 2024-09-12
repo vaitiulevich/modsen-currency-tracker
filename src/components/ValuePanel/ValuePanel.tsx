@@ -1,10 +1,10 @@
+import React, { useEffect, useState } from 'react';
 import ConversionModal from '@components/ConversionModal/ConversionModal';
 import Loader from '@components/Loader/Loader';
 import { images } from '@constants/images';
 import useLoadImage from '@utils/hooks/useLoadImage';
 import { CurrencyPanelProps } from 'interfaces/currency.inteface';
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
 
 import { CurrencyName, ValueIcon, ValuePanelContainer } from './styled';
 

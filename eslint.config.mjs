@@ -26,30 +26,25 @@ export default [
       },
     },
     rules: {
-      'simple-import-sort/imports': 'error', // Enforce sorting of imports
-      'simple-import-sort/exports': 'error', // Enforce sorting of exports
-      // Add any other global rules here
+      'simple-import-sort/exports': 'error',
+      'simple-import-sort/imports': [
+        'error',
+        {
+          groups: [['^\\u0000'], ['^react', '^@?\\w'], ['^src/', '^(../|./)']],
+        },
+      ],
     },
   },
-  // Recommended rules for JavaScript
   {
     files: ['**/*.js'],
-    rules: {
-      // Add JavaScript-specific rules here, if any
-    },
+    rules: {},
   },
-  // Recommended rules for TypeScript
   {
     files: ['**/*.{ts,tsx}'],
-    rules: {
-      // Add TypeScript-specific rules here, if any
-    },
+    rules: {},
   },
-  // React-specific rules
   {
     files: ['**/*.{jsx,tsx}'],
-    rules: {
-      // Add React-specific rules here, if any
-    },
+    rules: {},
   },
 ];

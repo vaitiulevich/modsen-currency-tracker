@@ -1,8 +1,8 @@
+import React, { useEffect, useState } from 'react';
 import { ALL_CURRENCY } from '@constants/currency';
 import { endPoints, URL_CURRENCY_API } from '@constants/urls';
 import { ConversionModalProps } from 'interfaces/convirsation.interface';
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
 
 import {
   CloseButton,

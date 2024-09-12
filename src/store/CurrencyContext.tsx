@@ -1,3 +1,11 @@
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import { ALL_CURRENCY } from '@constants/currency';
 import {
   API_KEY,
@@ -7,14 +15,6 @@ import {
 } from '@constants/urls';
 import fetchData from '@utils/fetchData';
 import { Currency, LatestValuesData } from 'interfaces/currency.inteface';
-import React, {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
 
 interface lastUpdatedState {
   last_updated_at: string;

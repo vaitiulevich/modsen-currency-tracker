@@ -1,8 +1,8 @@
+import React, { useContext, useEffect, useState } from 'react';
 import { CurrencyContext } from '@store/CurrencyContext';
 import useLoadImage from '@utils/hooks/useLoadImage';
 import { CurrencySelectorProps } from 'interfaces/timeline.interface';
 import PropTypes from 'prop-types';
-import React, { useContext, useEffect, useState } from 'react';
 
 import {
   ContentCurrencyPanel,

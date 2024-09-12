@@ -1,6 +1,6 @@
+import React from 'react';
 import logo from '@assets/logo.svg';
 import { images } from '@constants/images';
-import React from 'react';
 
 import {
   Column,

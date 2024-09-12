@@ -1,6 +1,6 @@
+import React from 'react';
 import { endPoints, URL_CURRENCY_API } from '@constants/urls';
 import { useCurrencyContext } from '@store/CurrencyContext';
-import React from 'react';
 
 import {
   StatusDot,

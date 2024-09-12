@@ -1,9 +1,9 @@
+import React, { useContext } from 'react';
 import Loader from '@components/Loader/Loader';
 import ValuePanel from '@components/ValuePanel/ValuePanel';
 import { STOCKS_LIST } from '@constants/currency';
 import { CurrencyContext } from '@store/CurrencyContext';
 import { Currency } from 'interfaces/currency.inteface';
-import React, { useContext } from 'react';
 
 import { AllCurrencyContainer, HomeContainer, Title } from './styled';
 

@@ -1,6 +1,6 @@
+import React, { Component, ErrorInfo } from 'react';
 import { images } from '@constants/images';
 import { ERR_BOUNDARY_MESS } from '@constants/messages';
-import React, { Component, ErrorInfo } from 'react';
 
 import { ErrorBoundaryComponent, ErrorBoundaryTitle } from './styled';
 

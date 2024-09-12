@@ -1,8 +1,8 @@
+import React, { Component } from 'react';
 import { images } from '@constants/images';
 import { SearchInputPlaceholder } from '@constants/messages';
 import { CurrencySearchProps } from 'interfaces/banks.interface';
 import { Currency } from 'interfaces/currency.inteface';
-import React, { Component } from 'react';
 
 import {
   CurrencyList,

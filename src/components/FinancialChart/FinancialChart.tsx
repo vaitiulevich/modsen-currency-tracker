@@ -1,5 +1,7 @@
 import 'chartjs-adapter-date-fns';
 
+import React, { Component } from 'react';
+import { Chart } from 'react-chartjs-2';
 import Loader from '@components/Loader/Loader';
 import TimlineModal from '@components/TimlineModal/TimlineModal';
 import { CHART_TITLE, CHART_X_TITLE, CHART_Y_TITLE } from '@constants/messages';
@@ -21,8 +23,6 @@ import {
   FinancialChartProps,
   TimelineContextType,
 } from 'interfaces/timeline.interface';
-import React, { Component } from 'react';
-import { Chart } from 'react-chartjs-2';
 
 ChartJS.register(
   CategoryScale,

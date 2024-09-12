@@ -1,17 +1,13 @@
+import React, { useContext } from 'react';
 import Loader from '@components/Loader/Loader';
 import TimelineForm from '@components/TimelineForm/TimelineForm';
 import TimelineContext from '@store/TimelineContext';
 import PropTypes from 'prop-types';
-import React, { useContext } from 'react';
 
 import {
   CloseButton,
-  ConversionCurencyPanel,
-  ConversionResult,
   ModalContent,
   ModalHeader,
-  ModalInput,
-  ModalSelect,
   ModalTitle,
   Overlay,
 } from './styled';

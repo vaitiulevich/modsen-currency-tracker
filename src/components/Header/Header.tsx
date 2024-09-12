@@ -1,8 +1,8 @@
+import React from 'react';
 import logo from '@assets/logo.svg';
 import ToggleSwitch from '@components/ToggleSwitch/ToggleSwitch';
 import { images } from '@constants/images';
 import { useTheme } from '@utils/hooks/useTheme';
-import React from 'react';
 
 import { HeaderContainer, Logo, Nav, NavItem } from './styled';
 

@@ -1,6 +1,6 @@
+import React from 'react';
 import UpdatedStatus from '@components/UpdatedStatus/UpdatedStatus';
 import { images } from '@constants/images';
-import React from 'react';
 
 import {
   HeroContainer,

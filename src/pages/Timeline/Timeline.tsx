@@ -1,5 +1,6 @@
 import 'chartjs-chart-financial';
 
+import React from 'react';
 import CurrencySelector from '@components/CurrencySelector/CurrencySelector';
 import FinancialChart from '@components/FinancialChart/FinancialChart';
 import Notification from '@components/Notification/Notification';
@@ -13,7 +14,6 @@ import {
   TimelineContextType,
   TimelineData,
 } from 'interfaces/timeline.interface';
-import React from 'react';
 
 import { TimelineContainer } from './styled';
 

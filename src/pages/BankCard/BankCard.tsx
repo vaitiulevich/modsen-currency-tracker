@@ -1,10 +1,10 @@
+import React from 'react';
 import BankMap from '@components/BankMap/BankMap';
 import CurrencySearch from '@components/CurrencySearch/CurrencySearch';
 import { allBanks } from '@constants/banks';
 import { CurrencyContext, CurrencyContextType } from '@store/CurrencyContext';
 import { BankCardState } from 'interfaces/banks.interface';
 import { Currency } from 'interfaces/currency.inteface';
-import React from 'react';
 
 class BankCard extends React.Component<{}, BankCardState> {
   static contextType = CurrencyContext;
@@ -71,7 +71,7 @@ class BankCard extends React.Component<{}, BankCardState> {
           onSearch={this.handleSearch}
           onSelectCurrency={this.onSetCurrency}
         />
-        {/* <BankMap banks={this.state.banks} /> */}
+        <BankMap banks={this.state.banks} />
       </div>
     );
   }

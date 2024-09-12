@@ -1,10 +1,10 @@
+import React, { ReactElement } from 'react';
+import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import App from '@pages/App/App';
 import BankCard from '@pages/BankCard/BankCard';
 import Contact from '@pages/Contact/Contact';
 import Home from '@pages/Home/Home';
 import Timeline from '@pages/Timeline/Timeline';
-import React, { ReactElement } from 'react';
-import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 
 export default function Routing(): ReactElement {
   return (

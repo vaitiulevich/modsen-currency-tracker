@@ -1,10 +1,10 @@
+import React, { createContext, useContext, useState } from 'react';
 import { CACHE_KEY } from '@constants/cache';
 import { ERR_TIMLINE_CONTEXT } from '@constants/messages';
 import {
   TimelineContextType,
   TimelineData,
 } from 'interfaces/timeline.interface';
-import React, { createContext, useContext, useState } from 'react';
 
 const TimelineContext = createContext<TimelineContextType | undefined>(
   undefined,

@@ -1,3 +1,4 @@
+import { Outlet } from 'react-router-dom';
 import ErrorBoundary from '@components/ErrorBoundary/ErrorBoundary';
 import Footer from '@components/Footer/Footer';
 import Header from '@components/Header/Header';
@@ -6,7 +7,6 @@ import { CurrencyProvider } from '@store/CurrencyContext';
 import { ThemeProvider } from '@store/ThemeContext';
 import { TimelineProvider } from '@store/TimelineContext';
 import GlobalStyle from '@styles/global';
-import { Outlet } from 'react-router-dom';
 
 import { AppComponent } from './styled';
 

@@ -1,3 +1,4 @@
+import React, { Component } from 'react';
 import { timelineFormFields } from '@constants/timeline';
 import TimelineContext from '@store/TimelineContext';
 import {
@@ -6,7 +7,6 @@ import {
   TimelineFormProps,
   TimelineFormState,
 } from 'interfaces/timeline.interface';
-import React, { Component } from 'react';
 
 import {
   FormCurrency,

@@ -1,6 +1,6 @@
+import React from 'react';
 import { ContactCardProps } from 'interfaces/contact.inteface';
 import PropTypes from 'prop-types';
-import React from 'react';
 
 import { ContactCardContainer, ContactCardTitle } from './styled';
 

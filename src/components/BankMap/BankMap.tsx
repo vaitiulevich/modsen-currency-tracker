@@ -1,10 +1,10 @@
 import 'mapbox-gl/dist/mapbox-gl.css';
 
+import React from 'react';
 import { MAPBOX_STYLES, MAPBOX_ZOOM } from '@constants/map';
 import { MAPBOX_TOKEN } from '@constants/urls';
 import { BankMapProps } from 'interfaces/banks.interface';
 import mapboxgl from 'mapbox-gl';
-import React from 'react';
 
 import { MapBox } from './styled';
 

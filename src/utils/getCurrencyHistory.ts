@@ -13,16 +13,18 @@ type CurrencyData = {
 };
 
 const getRandomInRange = (min: number, max: number) => {
-  return +(Math.random() * (max - min) + min).toFixed(5);
+  return +(Math.random() * (max - min) + min).toFixed(7);
 };
 
 const generateRandomCurrencyData = (date: Date): CurrencyData => {
   const price_open = getRandomInRange(1.0, 1.2);
   const price_close = getRandomInRange(1.0, 1.2);
-  const price_high =
-    Math.max(price_open, price_close) + getRandomInRange(0, 0.01);
-  const price_low =
-    Math.min(price_open, price_close) - getRandomInRange(0, 0.01);
+  const price_high = +(
+    Math.max(price_open, price_close) + getRandomInRange(0, 0.01)
+  ).toFixed(7);
+  const price_low = +(
+    Math.min(price_open, price_close) - getRandomInRange(0, 0.01)
+  ).toFixed(7);
   const time_close = date.toISOString();
 
   return {

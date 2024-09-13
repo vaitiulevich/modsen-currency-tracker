@@ -9,6 +9,7 @@ import {
 } from 'interfaces/timeline.interface';
 
 import {
+  ErrorMessage,
   FormCurrency,
   FormCurrencyInpPanel,
   FormCurrencyInput,
@@ -23,14 +24,39 @@ class TimelineForm extends Component<TimelineFormProps, TimelineFormState> {
     super(props);
     this.state = {
       timelineData: this.props.currentFinance || this.context.currentFinance,
+      errors: {},
     };
   }
+
+  validateInput = (name: string, value: string) => {
+    const errors: { [key: string]: string } = {};
+    const numberPattern = /^\d*([.,]\d{0,7})?$/;
+
+    if (value.trim() === '') {
+      errors[name] = 'Empty value';
+    }
+
+    if (!numberPattern.test(value)) {
+      errors[name] = 'Invalid value';
+    } else {
+      const numericValue = parseFloat(value.replace(',', '.'));
+      if (numericValue <= 0) {
+        errors[name] = 'The minimum value is greater than 0.';
+      }
+      if (numericValue >= 1000000) {
+        errors[name] = 'The maximum value is not greater than 1000000.';
+      }
+    }
+
+    this.setState({ errors });
+  };
 
   handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     this.setState((prevState) => ({
       timelineData: { ...prevState.timelineData, [name]: +value },
     }));
+    this.validateInput(name, value);
   };
 
   handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -41,8 +67,8 @@ class TimelineForm extends Component<TimelineFormProps, TimelineFormState> {
   render() {
     return (
       <FormCurrency onSubmit={this.handleSubmit}>
-        {timelineFormFields.map((field) => (
-          <FormCurrencyInpPanel>
+        {timelineFormFields.map((field, ind) => (
+          <FormCurrencyInpPanel key={ind}>
             <label>{field.fulltitle}</label>
             <FormCurrencyInput
               readOnly={field.readonly}
@@ -56,9 +82,17 @@ class TimelineForm extends Component<TimelineFormProps, TimelineFormState> {
               onChange={this.handleChange}
               required={field.required}
             />
+            {this.state.errors[field.name] && (
+              <ErrorMessage>{this.state.errors[field.name]}</ErrorMessage>
+            )}
           </FormCurrencyInpPanel>
         ))}
-        <SubmitButton type="submit">Change</SubmitButton>
+        <SubmitButton
+          disabled={Object.keys(this.state.errors).length !== 0}
+          type="submit"
+        >
+          Change
+        </SubmitButton>
       </FormCurrency>
     );
   }

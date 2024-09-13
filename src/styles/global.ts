@@ -10,7 +10,6 @@ const GlobalStyle = createGlobalStyle`
        font-family: ${(props) => props.theme.typography.fontFamily.general};
        font-weight: ${(props) => props.theme.typography.fontWeight.normal};
        font-size: ${(props) => props.theme.typography.fontSize.medium};
-       transition: all 0.3s;
 
    }
    #root{

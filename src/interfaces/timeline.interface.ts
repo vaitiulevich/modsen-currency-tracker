@@ -46,4 +46,7 @@ export interface TimelineFormProps {
 
 export interface TimelineFormState {
   timelineData: TimelineData;
+  errors: {
+    [key: string]: string;
+  };
 }

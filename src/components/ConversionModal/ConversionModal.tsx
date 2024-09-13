@@ -8,8 +8,10 @@ import {
   CloseButton,
   ConversionCurencyPanel,
   ConversionResult,
+  ErrorPanel,
   ModalContent,
   ModalInput,
+  ModalInputPanel,
   ModalSelect,
   ModalTitle,
   Overlay,
@@ -59,9 +61,27 @@ const ConversionModal: React.FC<ConversionModalProps> = ({
 
     setResCurrencyExchange(finalAmount);
   };
-
+  const [error, setError] = useState('');
+  const validateAmount = (value: string) => {
+    if (value === '') {
+      setError('Invalid value');
+      return false;
+    }
+    if (+value < 1) {
+      setError(`Minimum value 1`);
+      return false;
+    }
+    if (+value > 1000000) {
+      setError(`Maximum value 1 000 000`);
+      return false;
+    }
+    setError('');
+    return true;
+  };
   const onInputAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCurrencyAmount(+e.target.value);
+    if (validateAmount(e.target.value)) {
+      setCurrencyAmount(+e.target.value);
+    }
   };
 
   if (!isOpen) return null;
@@ -91,7 +111,7 @@ const ConversionModal: React.FC<ConversionModalProps> = ({
           <p>No data available</p>
         )}
 
-        <div>
+        <ModalInputPanel>
           <label>Amount:</label>
           <ModalInput
             type="number"
@@ -100,18 +120,22 @@ const ConversionModal: React.FC<ConversionModalProps> = ({
             defaultValue={currencyAmount}
             onChange={onInputAmount}
           />
-        </div>
+          {error && <ErrorPanel>{error}</ErrorPanel>}
+        </ModalInputPanel>
 
         <ConversionResult>
           <p>Currency conversion result:</p>
           <p>{resCurrencyExchange?.toFixed(7) ?? 0}</p>
         </ConversionResult>
 
-        <CloseButton onClick={onExchangeRates}>Exchange</CloseButton>
+        <CloseButton disabled={error !== ''} onClick={onExchangeRates}>
+          Exchange
+        </CloseButton>
         <CloseButton
           onClick={() => {
             setCurrencyAmount(1);
             setResCurrencyExchange(null);
+            setError('');
             onRequestClose();
           }}
         >

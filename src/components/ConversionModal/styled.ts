@@ -11,6 +11,7 @@ export const Overlay = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1;
 `;
 
 export const ModalContent = styled.div`
@@ -69,15 +70,36 @@ export const ModalInput = styled.input`
 export const CloseButton = styled.button`
   margin: 1rem;
   padding: 1rem 2rem;
-  background: ${(props) => props.theme.colors.fillSecondary};
-  color: ${(props) => props.theme.colors.generalFont};
+  background: ${(props) =>
+    props.disabled
+      ? props.theme.colors.modalFill
+      : props.theme.colors.fillSecondary};
+  color: ${(props) =>
+    props.disabled
+      ? props.theme.colors.footerSecondaryFont
+      : props.theme.colors.generalFont};
   border: 1px solid ${(props) => props.theme.colors.fillSecondary};
   outline: none;
   border-radius: 5px;
   cursor: pointer;
 
   &:hover {
-    color: ${(props) => props.theme.colors.accent};
-    border: 1px solid ${(props) => props.theme.colors.accent};
+    color: ${(props) =>
+      props.disabled
+        ? props.theme.colors.footerSecondaryFont
+        : props.theme.colors.accent};
+    border: 1px solid
+      ${(props) =>
+        props.disabled
+          ? props.theme.colors.footerSecondaryFont
+          : props.theme.colors.accent};
   }
+`;
+
+export const ModalInputPanel = styled.div`
+  height: 3rem;
+`;
+export const ErrorPanel = styled.p`
+  color: ${(props) => props.theme.colors.errMessage};
+  font-size: ${(props) => props.theme.typography.fontSize.small};
 `;

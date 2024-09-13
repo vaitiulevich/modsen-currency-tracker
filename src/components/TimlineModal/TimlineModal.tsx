@@ -38,6 +38,7 @@ const TimlineModal: React.FC<TimelineModalProps> = ({ isOpen, onClose }) => {
   ) => {
     e.preventDefault();
     addData(candlestickData);
+    onClose();
   };
 
   return (

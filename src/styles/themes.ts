@@ -11,7 +11,7 @@ export const darkTheme: DefaultTheme = {
     hoverFill: '#292930',
     secondaryFont: '#A7B2C3',
     linerGradientHero: 'linear-gradient(252.93deg, #24794000 1%, #121212 100%)',
-    errMessage: '##e40000',
+    errMessage: '#e40000',
     footerSecondaryFont: '#656565',
     modalFill: '#6868682b',
   },
@@ -55,7 +55,7 @@ export const lightTheme: DefaultTheme = {
     hoverFill: '#dddcdc',
     linerGradientHero:
       'linear-gradient(359.93deg, #24794000 1%, #355634 100%);',
-    errMessage: '##e40000',
+    errMessage: '#e40000',
     footerSecondaryFont: '#656565',
     modalFill: '#ffffffc4',
   },

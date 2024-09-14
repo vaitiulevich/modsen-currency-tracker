@@ -22,7 +22,7 @@ export const ModalHeader = styled.div`
 
 export const ModalContent = styled.div`
   background: ${(props) => props.theme.colors.modalFill};
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(1.5rem);
   padding: 1rem;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);

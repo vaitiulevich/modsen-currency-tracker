@@ -9,16 +9,11 @@ import { AllCurrencyContainer, HomeContainer, Title } from './styled';
 
 const Home: React.FC = () => {
   const context = useContext(CurrencyContext);
-
   if (!context) {
     return <div>Error: Context not found</div>;
   }
 
-  const { currencyList, valuesList, error, loading } = context;
-
-  if (error) {
-    return <div>{error}</div>;
-  }
+  const { currencyList, valuesList, loading } = context;
 
   if (loading) {
     return <Loader />;

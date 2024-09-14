@@ -17,19 +17,8 @@ export const HeaderContainer = styled.header`
   }
 `;
 
-export const Logo = styled.div``;
-
-export const Nav = styled.nav`
+export const MenuOptions = styled.div`
   display: flex;
-  gap: 2rem;
-  justify-content: space-between;
-  @media (max-width: ${breakpoints.mobile}px) {
-    gap: 0.5rem;
-  }
 `;
 
-export const NavItem = styled.a`
-  &:hover {
-    color: ${(props) => props.theme.colors.accent};
-  }
-`;
+export const Logo = styled.div``;

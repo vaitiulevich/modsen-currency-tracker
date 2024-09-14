@@ -1,26 +1,53 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from '@assets/logo.svg';
+import BurgerMenu from '@components/BurgerMenu/BurgerMenu';
+import Menu from '@components/Menu/Menu';
 import ToggleSwitch from '@components/ToggleSwitch/ToggleSwitch';
+import { breakpoints } from '@constants/breakpoints';
 import { images } from '@constants/images';
 import { useTheme } from '@utils/hooks/useTheme';
 
-import { HeaderContainer, Logo, Nav, NavItem } from './styled';
+import { HeaderContainer, Logo, MenuOptions } from './styled';
 
 const Header: React.FC = () => {
   const { toggleTheme, isLight } = useTheme();
+  const [isOpen, setIsOpen] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(
+    window.innerWidth > breakpoints.tablet,
+  );
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth > breakpoints.tablet);
+      if (window.innerWidth > breakpoints.tablet) {
+        setIsOpen(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
     <HeaderContainer>
       <Logo>
         <img src={images.logo} alt="logo" />
       </Logo>
-      <Nav>
-        <NavItem href="#">Home</NavItem>
-        <NavItem href="#timeline">Timeline</NavItem>
-        <NavItem href="#bank-card">Bank card</NavItem>
-        <NavItem href="#contact">Contact</NavItem>
-      </Nav>
-      <ToggleSwitch checked={isLight} onChange={toggleTheme} />
+      {isDesktop ? (
+        <>
+          <Menu />
+          <ToggleSwitch checked={isLight} onChange={toggleTheme} />
+        </>
+      ) : (
+        <MenuOptions>
+          <ToggleSwitch checked={isLight} onChange={toggleTheme} />
+          <BurgerMenu isOpen={isOpen} toggleMenu={toggleMenu} />
+        </MenuOptions>
+      )}
     </HeaderContainer>
   );
 };

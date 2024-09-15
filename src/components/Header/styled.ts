@@ -22,7 +22,3 @@ export const MenuContainer = styled.div<{ isDesktop: boolean }>`
   display: flex;
   justify-content: ${({ isDesktop }) => (isDesktop ? 'center' : 'flex-end')};
 `;
-
-export const MenuOptions = styled.div`
-  display: flex;
-`;

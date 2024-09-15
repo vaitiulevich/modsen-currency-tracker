@@ -6,7 +6,7 @@ import ToggleSwitch from '@components/ToggleSwitch/ToggleSwitch';
 import { useScreenSize } from '@utils/hooks/useScreenSize';
 import { useTheme } from '@utils/hooks/useTheme';
 
-import { HeaderContainer, MenuContainer, MenuOptions } from './styled';
+import { HeaderContainer, MenuContainer } from './styled';
 
 const Header = () => {
   const { toggleTheme, isLight } = useTheme();

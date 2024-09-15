@@ -1,4 +1,5 @@
-import { images } from '@constants/images';
+import { Logo } from '@components/Logo/Logo';
+import { footerLinks } from '@constants/footerColumns';
 
 import {
   Column,
@@ -6,7 +7,6 @@ import {
   FooterContainer,
   FooterContent,
   LinksContainer,
-  Logo,
   LogoHeadline,
   LogoTitle,
   NavItem,
@@ -14,14 +14,25 @@ import {
 } from './styled';
 
 const Footer = () => {
+  const renderLinks = () => {
+    return footerLinks.map((column) => (
+      <Column key={column.title}>
+        <h3>{column.title}</h3>
+        {column.links.map((link) => (
+          <NavItem key={link.name} href={link.href}>
+            {link.name}
+          </NavItem>
+        ))}
+      </Column>
+    ));
+  };
+
   return (
     <FooterContainer>
       <TopFooter>
         <FooterContent>
           <LogoHeadline>
-            <Logo>
-              <img src={images.logo} alt="logo" />
-            </Logo>
+            <Logo />
             <LogoTitle>Modsen Currency Tracker</LogoTitle>
           </LogoHeadline>
 
@@ -33,23 +44,7 @@ const Footer = () => {
           </p>
         </FooterContent>
 
-        <LinksContainer>
-          <Column>
-            <h3>General</h3>
-            <NavItem href="#market">Market</NavItem>
-            <NavItem href="#service">Service</NavItem>
-          </Column>
-          <Column>
-            <h3>Product</h3>
-            <NavItem href="#sparks">Sparks</NavItem>
-            <NavItem href="#snaps">Snaps</NavItem>
-          </Column>
-          <Column>
-            <h3>Community</h3>
-            <NavItem href="#ideas">Ideas</NavItem>
-            <NavItem href="#streams">Streams</NavItem>
-          </Column>
-        </LinksContainer>
+        <LinksContainer>{renderLinks()}</LinksContainer>
       </TopFooter>
       <div>
         <CopyrightInfo>

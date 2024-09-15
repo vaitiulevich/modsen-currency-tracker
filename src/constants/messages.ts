@@ -5,5 +5,6 @@ export const CHART_X_TITLE = 'Date';
 export const CHART_Y_TITLE = 'Value';
 
 export const ERR_BOUNDARY_MESS = 'ErrorBoundary caught an error: ';
+export const ERR_LOAD_IMG_MESS = 'Error loading image';
 export const ERR_TIMLINE_CONTEXT =
   'useTimelineContext must be used within a TimelineProvider';

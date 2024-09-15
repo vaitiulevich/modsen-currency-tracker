@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
+import { ERR_LOAD_IMG_MESS } from '@constants/messages';
 
-const useLoadImage = (code: string | undefined) => {
+const useLoadImage = (code?: string) => {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -15,8 +16,8 @@ const useLoadImage = (code: string | undefined) => {
           const imageModule = await import(`@assets/icons/${code}.svg`);
           setImageUrl(imageModule.default);
         } catch (err) {
-          console.error('Error loading image:', err);
-          setError('Error loading image');
+          console.error(ERR_LOAD_IMG_MESS, err);
+          setError(ERR_LOAD_IMG_MESS);
         } finally {
           setLoading(false);
         }

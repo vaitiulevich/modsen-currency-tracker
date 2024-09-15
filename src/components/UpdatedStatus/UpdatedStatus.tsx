@@ -1,4 +1,4 @@
-import { useCurrencyContext } from '@store/CurrencyContext';
+import { useCurrencyContext } from '@utils/hooks/useCurrencyContext';
 
 import {
   StatusDot,
@@ -7,8 +7,8 @@ import {
   UpdatedContainer,
 } from './styled';
 const UpdatedStatus = () => {
-  const lastUpdatedString = useCurrencyContext().lastUpdated.last_updated_at;
-  const lastUpdated = new Date(lastUpdatedString);
+  const { lastUpdated } = useCurrencyContext();
+  const lastUpdatedDate = new Date(lastUpdated.last_updated_at);
 
   return (
     <UpdatedContainer>
@@ -21,9 +21,9 @@ const UpdatedStatus = () => {
           <div>
             {lastUpdated ? (
               <p>
-                Last updated at {lastUpdated.getUTCHours()}:
-                {lastUpdated.getUTCMinutes()}
-                {lastUpdated.getUTCHours() <= 12 ? 'am' : 'pm'}
+                Last updated at {lastUpdatedDate.getUTCHours()}:
+                {lastUpdatedDate.getUTCMinutes()}
+                {lastUpdatedDate.getUTCHours() <= 12 ? 'am' : 'pm'}
               </p>
             ) : (
               <p>Not updated yet</p>

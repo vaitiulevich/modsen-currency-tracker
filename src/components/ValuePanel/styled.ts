@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const ValuePanelContainer = styled.div`
+export const ValuePanelContainer = styled.div<{ iscurrency: boolean }>`
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -8,10 +8,11 @@ export const ValuePanelContainer = styled.div`
   background-color: ${(props) => props.theme.colors.fillSecondary};
   border: ${(props) => props.theme.border.borderPanels};
   border-radius: 5px;
-  cursor: pointer;
+  cursor: ${(props) => props.iscurrency && 'pointer'};
 
   &:hover {
-    background-color: ${(props) => props.theme.colors.hoverFill};
+    background-color: ${(props) =>
+      props.iscurrency && props.theme.colors.hoverFill};
   }
 
   p {

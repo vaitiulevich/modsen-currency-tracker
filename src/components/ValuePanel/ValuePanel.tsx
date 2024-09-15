@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import ConversionModal from '@components/ConversionModal/ConversionModal';
 import Loader from '@components/Loader/Loader';
 import useLoadImage from '@utils/hooks/useLoadImage';
@@ -7,9 +7,13 @@ import PropTypes from 'prop-types';
 
 import { CurrencyName, ValueIcon, ValuePanelContainer } from './styled';
 
-const ValuePanel = ({ item, value, isCurrency, type }: CurrencyPanelProps) => {
+const ValuePanel = ({ item, value, isCurrency }: CurrencyPanelProps) => {
   if (!item) {
-    return <div>No currency data available.</div>;
+    return (
+      <ValuePanelContainer iscurrency={false}>
+        No currency data available.
+      </ValuePanelContainer>
+    );
   }
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -28,7 +32,10 @@ const ValuePanel = ({ item, value, isCurrency, type }: CurrencyPanelProps) => {
         onRequestClose={toggleModal}
         conversionData={{ code: item.code ?? '', value }}
       />
-      <ValuePanelContainer onClick={toggleModal}>
+      <ValuePanelContainer
+        iscurrency={isCurrency ? isCurrency : false}
+        onClick={toggleModal}
+      >
         <ValueIcon>
           {imageUrl ? <img src={imageUrl} alt={item.name} /> : <Loader />}
         </ValueIcon>
@@ -36,9 +43,9 @@ const ValuePanel = ({ item, value, isCurrency, type }: CurrencyPanelProps) => {
           <CurrencyName>{item.name}</CurrencyName>
           {value && (
             <p>
-              {type === 'quotes' && 'R$'}
+              {isCurrency && 'R$'}
               {value.toFixed(2)}
-              {type === 'stocks' && '%'}
+              {!isCurrency && '%'}
             </p>
           )}
         </div>
@@ -56,4 +63,4 @@ ValuePanel.propTypes = {
   isCurrency: PropTypes.bool.isRequired,
 };
 
-export default ValuePanel;
+export default memo(ValuePanel);

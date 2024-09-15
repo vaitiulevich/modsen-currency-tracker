@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import Menu from '@components/Menu/Menu';
 
 import { BurgerButton, MenuContainer, Overlay } from './styled';
@@ -23,4 +24,4 @@ const BurgerMenu = ({ isOpen, toggleMenu }: BurgerMenuProp) => {
   );
 };
 
-export default BurgerMenu;
+export default memo(BurgerMenu);

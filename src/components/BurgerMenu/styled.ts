@@ -25,7 +25,10 @@ export const BurgerButton = styled.button<{ isopen: boolean }>`
   border: none;
   cursor: pointer;
   z-index: 11;
-  margin-left: 1rem;
+  margin-right: 1rem;
+  position: ${({ isopen }) => isopen && 'fixed'};
+  top: 1rem;
+  right: 1rem;
 
   div {
     width: 2rem;

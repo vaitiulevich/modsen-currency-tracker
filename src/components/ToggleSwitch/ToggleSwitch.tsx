@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import PropTypes from 'prop-types';
 
 import { ToggleContainer, ToggleInput, ToggleSlider } from './styled';
@@ -21,4 +22,4 @@ ToggleSwitch.propTypes = {
   onChange: PropTypes.func.isRequired,
 };
 
-export default ToggleSwitch;
+export default memo(ToggleSwitch);

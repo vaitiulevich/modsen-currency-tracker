@@ -17,8 +17,12 @@ export const HeaderContainer = styled.header`
   }
 `;
 
+export const MenuContainer = styled.div<{ isDesktop: boolean }>`
+  flex-grow: 1;
+  display: flex;
+  justify-content: ${({ isDesktop }) => (isDesktop ? 'center' : 'flex-end')};
+`;
+
 export const MenuOptions = styled.div`
   display: flex;
 `;
-
-export const Logo = styled.div``;

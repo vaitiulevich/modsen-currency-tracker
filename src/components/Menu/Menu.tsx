@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 import { Nav, NavItem } from './styled';
 
 interface MenuProp {
@@ -23,4 +25,4 @@ const Menu = ({ toggleMenu }: MenuProp) => {
   );
 };
 
-export default Menu;
+export default memo(Menu);

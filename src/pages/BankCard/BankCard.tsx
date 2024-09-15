@@ -2,7 +2,9 @@ import { ChangeEvent, Component } from 'react';
 import BankMap from '@components/BankMap/BankMap';
 import CurrencySearch from '@components/CurrencySearch/CurrencySearch';
 import { allBanks } from '@constants/banks';
+import { CENTER_MAP } from '@constants/map';
 import { CurrencyContext, CurrencyContextType } from '@store/CurrencyContext';
+import { includesNormalizeStr } from '@utils/includesNormalizeStr';
 import { BankCardState } from 'interfaces/banks.interface';
 import { Currency } from 'interfaces/currency.inteface';
 
@@ -15,7 +17,7 @@ class BankCard extends Component<{}, BankCardState> {
       banks: allBanks,
       searchTerm: '',
       filteredBanks: [],
-      searcebleCurrency: [],
+      searchableCurrency: [],
     };
   }
   componentDidMount() {
@@ -25,36 +27,44 @@ class BankCard extends Component<{}, BankCardState> {
     }));
   }
 
-  handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
-    const searchTerm = event.target.value.toLowerCase().trim();
-    this.setState((prevState) => ({
-      ...prevState,
-      searchTerm,
-    }));
+  onSetSearchableCurrency = (searchTerm: string) => {
     const { currencyList } = this.context;
 
-    const searcebleCurrency = currencyList.filter(
+    const searchableCurrency = currencyList.filter(
       (currency) =>
-        currency.name?.toLowerCase().includes(searchTerm) ||
-        currency.code?.toLowerCase().includes(searchTerm),
+        includesNormalizeStr(currency.name, searchTerm) ||
+        includesNormalizeStr(currency.code, searchTerm),
     );
 
     this.setState((prevState) => ({
       ...prevState,
-      searcebleCurrency,
+      searchableCurrency,
     }));
   };
 
+  handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
+    const searchTerm = event.target.value.toLowerCase().trim();
+    this.setState(
+      (prevState) => ({
+        ...prevState,
+        searchTerm,
+      }),
+      () => this.onSetSearchableCurrency(searchTerm),
+    );
+  };
+
   onSetCurrency = (currency: Currency) => {
-    const code = currency.code || this.state.searchTerm;
+    const { searchTerm } = this.state;
+    const code = currency.code || searchTerm;
 
     const filteredBanks = allBanks.filter(
       (bank) =>
-        bank.name.toLowerCase().includes(code.toLowerCase()) ||
+        includesNormalizeStr(bank.name, code.toLowerCase()) ||
         bank.currency.some((curr) =>
-          curr.toLowerCase().includes(code.toLowerCase()),
+          includesNormalizeStr(curr, code.toLowerCase()),
         ),
     );
+    console.log(filteredBanks);
     this.setState((prevState) => ({
       ...prevState,
       banks: filteredBanks,
@@ -62,16 +72,16 @@ class BankCard extends Component<{}, BankCardState> {
   };
 
   render() {
-    const { searchTerm } = this.state;
+    const { searchTerm, banks, searchableCurrency } = this.state;
     return (
       <div>
         <CurrencySearch
           searchTerm={searchTerm}
-          searcebleCurrency={this.state.searcebleCurrency}
+          searchableCurrency={searchableCurrency}
           onSearch={this.handleSearch}
           onSelectCurrency={this.onSetCurrency}
         />
-        <BankMap banks={this.state.banks} />
+        <BankMap banks={banks} center={CENTER_MAP} />
       </div>
     );
   }

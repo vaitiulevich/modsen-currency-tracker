@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { images } from '@constants/images';
-import { SearchInputPlaceholder } from '@constants/messages';
+import { searchInputPlaceholder } from '@constants/messages';
 import { CurrencySearchProps } from 'interfaces/banks.interface';
 import { Currency } from 'interfaces/currency.inteface';
 
@@ -28,24 +28,44 @@ class CurrencySearch extends Component<
   handleBlur = () => {
     setTimeout(() => {
       this.setState({ isFocused: false });
-    }, 100);
+    }, 300);
   };
 
   handleSelectCurrency = (currency: Currency) => {
-    this.props.onSelectCurrency(currency);
+    const { onSelectCurrency } = this.props;
+    console.log(currency);
+    onSelectCurrency(currency);
     this.setState({ isFocused: false });
   };
 
+  renderCurrencyList() {
+    const { searchableCurrency } = this.props;
+
+    return (
+      <CurrencyList>
+        {searchableCurrency.map((currency) => (
+          <CurrencyListItem
+            key={currency.code}
+            onClick={() => this.handleSelectCurrency(currency)}
+          >
+            {currency.name}
+          </CurrencyListItem>
+        ))}
+      </CurrencyList>
+    );
+  }
+
   render() {
-    const { searchTerm, searcebleCurrency, onSearch } = this.props;
+    const { searchTerm, searchableCurrency, onSearch } = this.props;
     const { isFocused } = this.state;
+    const isShowCurrencyList = isFocused && searchableCurrency.length > 0;
 
     return (
       <SearchContainer>
         <SearchTitle>Search currency in the bank</SearchTitle>
         <SearchInputPanel>
           <SearchInput
-            placeholder={SearchInputPlaceholder}
+            placeholder={searchInputPlaceholder}
             value={searchTerm}
             onChange={onSearch}
             onFocus={() => this.setState({ isFocused: true })}
@@ -55,18 +75,7 @@ class CurrencySearch extends Component<
             <img src={images.searchIcon} alt="search" />
           </SearchButton>
         </SearchInputPanel>
-        {isFocused && searcebleCurrency.length > 0 && (
-          <CurrencyList>
-            {searcebleCurrency.map((currency, index) => (
-              <CurrencyListItem
-                key={index}
-                onClick={() => this.handleSelectCurrency(currency)}
-              >
-                {currency.name}
-              </CurrencyListItem>
-            ))}
-          </CurrencyList>
-        )}
+        {isShowCurrencyList && this.renderCurrencyList()}
       </SearchContainer>
     );
   }

@@ -15,14 +15,18 @@ export interface BankCardState {
   banks: Bank[];
   searchTerm: string;
   filteredBanks: Bank[];
-  searcebleCurrency: Currency[];
+  searchableCurrency: Currency[];
 }
 export interface BankMapProps {
   banks: Bank[];
+  center: {
+    lng: number;
+    lat: number;
+  };
 }
 export interface CurrencySearchProps {
   searchTerm: string;
-  searcebleCurrency: Currency[];
+  searchableCurrency: Currency[];
   onSearch: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onSelectCurrency: (currency: Currency) => void;
 }

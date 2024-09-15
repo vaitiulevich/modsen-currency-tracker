@@ -1,4 +1,4 @@
-export const SearchInputPlaceholder = 'Сurrency search...';
+export const searchInputPlaceholder = 'Сurrency search...';
 export const SUCCESS_COMLITED_NOTIFICATION = 'Chart successfully compiled';
 export const CHART_TITLE = 'Click on the chart candle to change';
 export const CHART_X_TITLE = 'Date';

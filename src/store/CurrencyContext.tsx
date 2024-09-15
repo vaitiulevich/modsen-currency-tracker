@@ -1,5 +1,6 @@
-import React, {
+import {
   createContext,
+  ReactNode,
   useCallback,
   useContext,
   useEffect,
@@ -34,9 +35,7 @@ export const CurrencyContext = createContext<CurrencyContextType | undefined>(
   undefined,
 );
 
-export const CurrencyProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+export const CurrencyProvider = ({ children }: { children: ReactNode }) => {
   const [currencyList, setCurrencyList] = useState<Currency[]>([]);
   const [lastUpdated, setLastUpdated] = useState<lastUpdatedState>({
     last_updated_at: '',

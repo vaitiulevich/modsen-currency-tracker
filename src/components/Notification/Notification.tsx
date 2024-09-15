@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 import { NotificationContainer, NotificationText } from './styled';
 
@@ -7,7 +7,7 @@ interface NotificationProps {
   onClose: () => void;
 }
 
-const Notification: React.FC<NotificationProps> = ({ message, onClose }) => {
+const Notification = ({ message, onClose }: NotificationProps) => {
   useEffect(() => {
     const timer = setTimeout(onClose, 2000);
     return () => clearTimeout(timer);

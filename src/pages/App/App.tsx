@@ -10,7 +10,7 @@ import GlobalStyle from '@styles/global';
 
 import { AppComponent } from './styled';
 
-function App() {
+const App = () => {
   return (
     <ThemeProvider>
       <CurrencyProvider>
@@ -30,6 +30,6 @@ function App() {
       </CurrencyProvider>
     </ThemeProvider>
   );
-}
+};
 
 export default App;

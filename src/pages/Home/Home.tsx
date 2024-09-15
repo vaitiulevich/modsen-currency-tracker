@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import Loader from '@components/Loader/Loader';
 import ValuePanel from '@components/ValuePanel/ValuePanel';
 import { STOCKS_LIST } from '@constants/currency';
@@ -7,7 +7,7 @@ import { Currency } from 'interfaces/currency.inteface';
 
 import { AllCurrencyContainer, HomeContainer, Title } from './styled';
 
-const Home: React.FC = () => {
+const Home = () => {
   const context = useContext(CurrencyContext);
   if (!context) {
     return <div>Error: Context not found</div>;

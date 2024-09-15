@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { ChangeEvent, Component, FormEvent } from 'react';
 import { timelineFormFields } from '@constants/timeline';
 import TimelineContext from '@store/TimelineContext';
 import {
@@ -51,7 +51,7 @@ class TimelineForm extends Component<TimelineFormProps, TimelineFormState> {
     this.setState({ errors });
   };
 
-  handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     this.setState((prevState) => ({
       timelineData: { ...prevState.timelineData, [name]: +value },
@@ -59,7 +59,7 @@ class TimelineForm extends Component<TimelineFormProps, TimelineFormState> {
     this.validateInput(name, value);
   };
 
-  handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     this.props.onSubmit(e, this.state.timelineData);
   };

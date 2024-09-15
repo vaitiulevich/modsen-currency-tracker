@@ -1,4 +1,3 @@
-import React from 'react';
 import UpdatedStatus from '@components/UpdatedStatus/UpdatedStatus';
 import { images } from '@constants/images';
 
@@ -10,7 +9,7 @@ import {
   HeroSubtitle,
 } from './styled';
 
-const Hero: React.FC = () => {
+const Hero = () => {
   return (
     <>
       <HeroContainer>

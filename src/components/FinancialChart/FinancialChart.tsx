@@ -1,6 +1,6 @@
 import 'chartjs-adapter-date-fns';
 
-import React, { Component } from 'react';
+import { Component, MouseEvent } from 'react';
 import { Chart } from 'react-chartjs-2';
 import Loader from '@components/Loader/Loader';
 import TimlineModal from '@components/TimlineModal/TimlineModal';
@@ -106,7 +106,7 @@ class FinancialChart extends Component<FinancialChartProps> {
       },
     ];
 
-    const handleClick = (event: React.MouseEvent<HTMLCanvasElement>) => {
+    const handleClick = (event: MouseEvent<HTMLCanvasElement>) => {
       const chart = ChartJS.getChart(
         event.nativeEvent.target as HTMLCanvasElement,
       );

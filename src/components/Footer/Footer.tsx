@@ -1,5 +1,3 @@
-import React from 'react';
-import logo from '@assets/logo.svg';
 import { images } from '@constants/images';
 
 import {
@@ -15,7 +13,7 @@ import {
   TopFooter,
 } from './styled';
 
-const Footer: React.FC = () => {
+const Footer = () => {
   return (
     <FooterContainer>
       <TopFooter>

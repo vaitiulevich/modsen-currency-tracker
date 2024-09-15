@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { ChangeEvent, useContext, useEffect, useState } from 'react';
 import { CurrencyContext } from '@store/CurrencyContext';
 import useLoadImage from '@utils/hooks/useLoadImage';
 import { CurrencySelectorProps } from 'interfaces/timeline.interface';
@@ -12,9 +12,7 @@ import {
   TitleCurrencyPanel,
 } from './styled';
 
-const CurrencySelector: React.FC<CurrencySelectorProps> = ({
-  onSetCurrency,
-}) => {
+const CurrencySelector = ({ onSetCurrency }: CurrencySelectorProps) => {
   const context = useContext(CurrencyContext);
   const [selectedCurrency, setSelectedCurrency] = useState(
     context?.currencyList[0],
@@ -27,7 +25,7 @@ const CurrencySelector: React.FC<CurrencySelectorProps> = ({
     }
   }, [context?.currencyList]);
 
-  const onSelectCurrency = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const onSelectCurrency = (e: ChangeEvent<HTMLSelectElement>) => {
     setSelectedCurrency(
       context?.currencyList.find((item) => item.code === e.target.value),
     );

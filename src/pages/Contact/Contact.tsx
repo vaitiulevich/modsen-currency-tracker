@@ -1,10 +1,9 @@
-import React from 'react';
 import ContactCard from '@components/ContactCard/ContactCard';
 import { contacts } from '@constants/contacts';
 
 import { ContactContainer, ContactList, ContactTitle } from './styled';
 
-const Contact: React.FC = () => {
+const Contact = () => {
   return (
     <ContactContainer>
       <ContactTitle>Contact Us</ContactTitle>

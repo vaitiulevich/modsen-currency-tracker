@@ -1,4 +1,3 @@
-import React, { ReactElement } from 'react';
 import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import App from '@pages/App/App';
 import BankCard from '@pages/BankCard/BankCard';
@@ -6,7 +5,7 @@ import Contact from '@pages/Contact/Contact';
 import Home from '@pages/Home/Home';
 import Timeline from '@pages/Timeline/Timeline';
 
-export default function Routing(): ReactElement {
+const Routing = () => {
   return (
     <Router>
       <Routes>
@@ -19,4 +18,6 @@ export default function Routing(): ReactElement {
       </Routes>
     </Router>
   );
-}
+};
+
+export default Routing;

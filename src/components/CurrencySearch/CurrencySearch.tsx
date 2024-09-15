@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { images } from '@constants/images';
 import { SearchInputPlaceholder } from '@constants/messages';
 import { CurrencySearchProps } from 'interfaces/banks.interface';

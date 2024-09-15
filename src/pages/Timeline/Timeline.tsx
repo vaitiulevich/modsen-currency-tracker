@@ -1,6 +1,6 @@
 import 'chartjs-chart-financial';
 
-import React from 'react';
+import { ChangeEvent, Component } from 'react';
 import CurrencySelector from '@components/CurrencySelector/CurrencySelector';
 import FinancialChart from '@components/FinancialChart/FinancialChart';
 import Notification from '@components/Notification/Notification';
@@ -17,7 +17,7 @@ import {
 
 import { TimelineContainer } from './styled';
 
-class Timeline extends React.Component<{}, TimelineChartState> {
+class Timeline extends Component<{}, TimelineChartState> {
   static contextType = TimelineContext;
   context!: TimelineContextType;
 
@@ -55,7 +55,7 @@ class Timeline extends React.Component<{}, TimelineChartState> {
     setTimeout(() => this.setState({ isShowNotification: false }), 2000);
   };
 
-  onSetCurrency = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  onSetCurrency = (e: ChangeEvent<HTMLSelectElement>) => {
     this.onFetchCurrencyData(e.target.value);
   };
 

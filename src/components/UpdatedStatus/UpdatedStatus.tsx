@@ -1,5 +1,3 @@
-import React from 'react';
-import { endPoints, URL_CURRENCY_API } from '@constants/urls';
 import { useCurrencyContext } from '@store/CurrencyContext';
 
 import {
@@ -8,7 +6,7 @@ import {
   StatusDotShadow,
   UpdatedContainer,
 } from './styled';
-const UpdatedStatus: React.FC = () => {
+const UpdatedStatus = () => {
   const lastUpdatedString = useCurrencyContext().lastUpdated.last_updated_at;
   const lastUpdated = new Date(lastUpdatedString);
 

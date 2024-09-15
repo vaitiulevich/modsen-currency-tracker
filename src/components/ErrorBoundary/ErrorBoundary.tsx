@@ -1,11 +1,11 @@
-import React, { Component, ErrorInfo } from 'react';
+import { Component, ErrorInfo, ReactNode } from 'react';
 import { images } from '@constants/images';
 import { ERR_BOUNDARY_MESS } from '@constants/messages';
 
 import { ErrorBoundaryComponent, ErrorBoundaryTitle } from './styled';
 
 interface Props {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 interface State {

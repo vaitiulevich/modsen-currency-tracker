@@ -1,10 +1,9 @@
-import React from 'react';
 import { ContactCardProps } from 'interfaces/contact.inteface';
 import PropTypes from 'prop-types';
 
 import { ContactCardContainer, ContactCardTitle } from './styled';
 
-const ContactCard: React.FC<ContactCardProps> = ({ contact }) => {
+const ContactCard = ({ contact }: ContactCardProps) => {
   return (
     <ContactCardContainer>
       <ContactCardTitle>{contact.name}</ContactCardTitle>

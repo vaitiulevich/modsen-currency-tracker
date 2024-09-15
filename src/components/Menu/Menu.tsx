@@ -1,12 +1,10 @@
-import React from 'react';
-
 import { Nav, NavItem } from './styled';
 
 interface MenuProp {
   toggleMenu?: () => void;
 }
 
-const Menu: React.FC<MenuProp> = ({ toggleMenu }) => {
+const Menu = ({ toggleMenu }: MenuProp) => {
   return (
     <Nav>
       <NavItem onClick={toggleMenu} href="#">

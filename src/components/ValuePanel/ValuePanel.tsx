@@ -1,19 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
 import ConversionModal from '@components/ConversionModal/ConversionModal';
 import Loader from '@components/Loader/Loader';
-import { images } from '@constants/images';
 import useLoadImage from '@utils/hooks/useLoadImage';
 import { CurrencyPanelProps } from 'interfaces/currency.inteface';
 import PropTypes from 'prop-types';
 
 import { CurrencyName, ValueIcon, ValuePanelContainer } from './styled';
 
-const ValuePanel: React.FC<CurrencyPanelProps> = ({
-  item,
-  value,
-  isCurrency,
-  type,
-}) => {
+const ValuePanel = ({ item, value, isCurrency, type }: CurrencyPanelProps) => {
   if (!item) {
     return <div>No currency data available.</div>;
   }

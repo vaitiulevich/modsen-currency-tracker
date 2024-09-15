@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ALL_CURRENCY } from '@constants/currency';
 import { endPoints, URL_CURRENCY_API } from '@constants/urls';
 import { ConversionModalProps } from 'interfaces/convirsation.interface';
@@ -17,11 +17,11 @@ import {
   Overlay,
 } from './styled';
 
-const ConversionModal: React.FC<ConversionModalProps> = ({
+const ConversionModal = ({
   isOpen,
   onRequestClose,
   conversionData,
-}) => {
+}: ConversionModalProps) => {
   const storedData =
     localStorage.getItem(URL_CURRENCY_API + endPoints.latestCurrency) ?? '{}';
   const [AllCurrencyExchange, setAllCurrencyExchange] = useState(

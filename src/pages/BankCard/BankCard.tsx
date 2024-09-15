@@ -1,4 +1,4 @@
-import React from 'react';
+import { ChangeEvent, Component } from 'react';
 import BankMap from '@components/BankMap/BankMap';
 import CurrencySearch from '@components/CurrencySearch/CurrencySearch';
 import { allBanks } from '@constants/banks';
@@ -6,7 +6,7 @@ import { CurrencyContext, CurrencyContextType } from '@store/CurrencyContext';
 import { BankCardState } from 'interfaces/banks.interface';
 import { Currency } from 'interfaces/currency.inteface';
 
-class BankCard extends React.Component<{}, BankCardState> {
+class BankCard extends Component<{}, BankCardState> {
   static contextType = CurrencyContext;
   context!: CurrencyContextType;
   constructor(props: {}) {
@@ -25,7 +25,7 @@ class BankCard extends React.Component<{}, BankCardState> {
     }));
   }
 
-  handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+  handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
     const searchTerm = event.target.value.toLowerCase().trim();
     this.setState((prevState) => ({
       ...prevState,

@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import logo from '@assets/logo.svg';
+import { useEffect, useState } from 'react';
 import BurgerMenu from '@components/BurgerMenu/BurgerMenu';
 import Menu from '@components/Menu/Menu';
 import ToggleSwitch from '@components/ToggleSwitch/ToggleSwitch';
@@ -9,7 +8,7 @@ import { useTheme } from '@utils/hooks/useTheme';
 
 import { HeaderContainer, Logo, MenuOptions } from './styled';
 
-const Header: React.FC = () => {
+const Header = () => {
   const { toggleTheme, isLight } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
   const [isDesktop, setIsDesktop] = useState(

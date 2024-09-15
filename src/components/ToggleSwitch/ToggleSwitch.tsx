@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 
 import { ToggleContainer, ToggleInput, ToggleSlider } from './styled';
@@ -8,7 +7,7 @@ interface ToggleSwitchProps {
   onChange: () => void;
 }
 
-const ToggleSwitch: React.FC<ToggleSwitchProps> = ({ checked, onChange }) => {
+const ToggleSwitch = ({ checked, onChange }: ToggleSwitchProps) => {
   return (
     <ToggleContainer>
       <ToggleInput type="checkbox" checked={checked} onChange={onChange} />

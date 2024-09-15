@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { FormEvent, useContext } from 'react';
 import Loader from '@components/Loader/Loader';
 import TimelineForm from '@components/TimelineForm/TimelineForm';
 import TimelineContext from '@store/TimelineContext';
@@ -23,7 +23,7 @@ interface TimelineModalProps {
   onClose: () => void;
 }
 
-const TimlineModal: React.FC<TimelineModalProps> = ({ isOpen, onClose }) => {
+const TimlineModal = ({ isOpen, onClose }: TimelineModalProps) => {
   if (!isOpen) return null;
 
   const context = useContext(TimelineContext);
@@ -33,7 +33,7 @@ const TimlineModal: React.FC<TimelineModalProps> = ({ isOpen, onClose }) => {
   const { currentFinance, addData } = context;
 
   const onSubmit = (
-    e: React.FormEvent<HTMLFormElement>,
+    e: FormEvent<HTMLFormElement>,
     candlestickData: FinanceProps,
   ) => {
     e.preventDefault();

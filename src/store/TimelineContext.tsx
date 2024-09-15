@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import { createContext, ReactNode, useContext, useState } from 'react';
 import { CACHE_KEY } from '@constants/cache';
 import { ERR_TIMLINE_CONTEXT } from '@constants/messages';
 import {
@@ -12,9 +12,7 @@ const TimelineContext = createContext<TimelineContextType | undefined>(
 
 export const timelineColors = { up: '#16C782', down: '#EA3943' };
 
-export const TimelineProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+export const TimelineProvider = ({ children }: { children: ReactNode }) => {
   const [currentFinance, setCurrentFinance] = useState<TimelineData>({
     x: new Date(),
     o: 0,

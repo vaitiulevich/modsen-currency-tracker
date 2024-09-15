@@ -1,4 +1,4 @@
-import React, { createContext, ReactNode, useContext, useState } from 'react';
+import { createContext, ReactNode, useContext, useState } from 'react';
 import { darkTheme, lightTheme } from '@styles/themes';
 import {
   DefaultTheme,
@@ -11,9 +11,7 @@ type ThemeState = {
 };
 export const ThemeContext = createContext<ThemeState | undefined>(undefined);
 
-export const ThemeProvider: React.FC<{ children: ReactNode }> = ({
-  children,
-}) => {
+export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const [isLight, setisLight] = useState(
     localStorage.getItem('isLightTheme') === 'true',
   );

@@ -1,4 +1,3 @@
-import React from 'react';
 import Menu from '@components/Menu/Menu';
 
 import { BurgerButton, MenuContainer, Overlay } from './styled';
@@ -8,7 +7,7 @@ interface BurgerMenuProp {
   toggleMenu: () => void;
 }
 
-const BurgerMenu: React.FC<BurgerMenuProp> = ({ isOpen, toggleMenu }) => {
+const BurgerMenu = ({ isOpen, toggleMenu }: BurgerMenuProp) => {
   return (
     <>
       <Overlay isopen={isOpen} onClick={toggleMenu} />

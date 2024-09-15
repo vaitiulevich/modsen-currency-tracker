@@ -1,6 +1,6 @@
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-import React from 'react';
+import { Component, createRef, RefObject } from 'react';
 import { MAPBOX_STYLES, MAPBOX_ZOOM } from '@constants/map';
 import { MAPBOX_TOKEN } from '@constants/urls';
 import { BankMapProps } from 'interfaces/banks.interface';
@@ -10,14 +10,14 @@ import { MapBox } from './styled';
 
 mapboxgl.accessToken = MAPBOX_TOKEN;
 
-class BankMap extends React.Component<BankMapProps> {
-  private mapContainer: React.RefObject<HTMLDivElement>;
+class BankMap extends Component<BankMapProps> {
+  private mapContainer: RefObject<HTMLDivElement>;
   private map: mapboxgl.Map | null;
   private markers: mapboxgl.Marker[];
 
   constructor(props: BankMapProps) {
     super(props);
-    this.mapContainer = React.createRef();
+    this.mapContainer = createRef();
     this.map = null;
     this.markers = [];
   }

@@ -18,6 +18,7 @@ import TimelineContext, { TimelineContextType } from '@store/TimelineContext';
 import { getDateRange } from '@utils/dateHelpers';
 import { getCurrencyHistory } from '@utils/getCurrencyHistory';
 import { notificationService } from '@utils/NotificationService';
+import withScrollAnimation from 'HOC/withScrollAnimation';
 import {
   FetchDataPoint,
   TimelineChartState,
@@ -104,4 +105,4 @@ class Timeline extends Component<{}, TimelineChartState> {
   }
 }
 
-export default Timeline;
+export default withScrollAnimation(Timeline);

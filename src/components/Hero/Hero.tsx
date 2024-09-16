@@ -1,5 +1,6 @@
 import UpdatedStatus from '@components/UpdatedStatus/UpdatedStatus';
 import { images } from '@constants/images';
+import withScrollAnimation from 'HOC/withScrollAnimation';
 
 import {
   HeroContainer,
@@ -31,4 +32,4 @@ const Hero = () => {
   );
 };
 
-export default Hero;
+export default withScrollAnimation(Hero);

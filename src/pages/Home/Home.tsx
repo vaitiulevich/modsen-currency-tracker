@@ -3,6 +3,7 @@ import Loader from '@components/Loader/Loader';
 import ValuePanel from '@components/ValuePanel/ValuePanel';
 import { STOCKS_LIST } from '@constants/currency';
 import { useCurrencyContext } from '@utils/hooks/useCurrencyContext';
+import withScrollAnimation from 'HOC/withScrollAnimation';
 
 import { AllCurrencyContainer, HomeContainer, Title } from './styled';
 
@@ -45,4 +46,4 @@ const Home = () => {
   );
 };
 
-export default memo(Home);
+export default memo(withScrollAnimation(Home));

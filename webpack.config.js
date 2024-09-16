@@ -61,6 +61,7 @@ module.exports = {
             options: {
               limit: 10000,
               mimetype: 'image/svg+xml',
+              name: 'assets/icons/[name].[hash:8].[ext]',
             },
           },
         ],

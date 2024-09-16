@@ -9,6 +9,7 @@ type ThemeState = {
   toggleTheme: () => void;
   isLight: boolean;
 };
+
 export const ThemeContext = createContext<ThemeState | undefined>(undefined);
 
 const getInitialTheme = () => {

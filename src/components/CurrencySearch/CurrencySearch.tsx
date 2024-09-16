@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { PureComponent } from 'react';
 import { images } from '@constants/images';
 import { NO_CURRENCY, searchInputPlaceholder } from '@constants/messages';
 import { CurrencySearchProps } from 'interfaces/banks.interface';
@@ -14,7 +14,7 @@ import {
   SearchTitle,
 } from './styled';
 
-class CurrencySearch extends Component<
+class CurrencySearch extends PureComponent<
   CurrencySearchProps,
   { isFocused: boolean }
 > {
@@ -33,18 +33,19 @@ class CurrencySearch extends Component<
 
   handleSelectCurrency = (currency: Currency) => {
     const { onSelectCurrency } = this.props;
-    console.log(currency);
     onSelectCurrency(currency);
     this.setState({ isFocused: false });
   };
 
   renderCurrencyList() {
     const { searchableCurrency } = this.props;
-    console.log(searchableCurrency);
-    if (searchableCurrency.length === 0) {
-      console.log(searchableCurrency);
 
-      return <CurrencyListItem>{NO_CURRENCY}</CurrencyListItem>;
+    if (searchableCurrency.length === 0) {
+      return (
+        <CurrencyList>
+          <CurrencyListItem>{NO_CURRENCY}</CurrencyListItem>
+        </CurrencyList>
+      );
     }
     return (
       <CurrencyList>
@@ -61,9 +62,8 @@ class CurrencySearch extends Component<
   }
 
   render() {
-    const { searchTerm, searchableCurrency, onSearch } = this.props;
+    const { searchTerm, handleSearch } = this.props;
     const { isFocused } = this.state;
-    const isShowCurrencyList = isFocused && searchableCurrency.length > 0;
 
     return (
       <SearchContainer>
@@ -72,7 +72,7 @@ class CurrencySearch extends Component<
           <SearchInput
             placeholder={searchInputPlaceholder}
             value={searchTerm}
-            onChange={onSearch}
+            onChange={handleSearch}
             onFocus={() => this.setState({ isFocused: true })}
             onBlur={this.handleBlur}
           />
@@ -80,7 +80,7 @@ class CurrencySearch extends Component<
             <img src={images.searchIcon} alt="search" />
           </SearchButton>
         </SearchInputPanel>
-        {isShowCurrencyList && this.renderCurrencyList()}
+        {isFocused && this.renderCurrencyList()}
       </SearchContainer>
     );
   }

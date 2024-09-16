@@ -1,9 +1,8 @@
 import { ChangeEvent, FormEvent, PureComponent } from 'react';
 import { timelineFormFields } from '@constants/timeline';
-import TimelineContext from '@store/TimelineContext';
+import TimelineContext, { TimelineContextType } from '@store/TimelineContext';
 import { validateInput } from '@utils/validation';
 import {
-  TimelineContextType,
   TimelineData,
   TimelineFormProps,
   TimelineFormState,

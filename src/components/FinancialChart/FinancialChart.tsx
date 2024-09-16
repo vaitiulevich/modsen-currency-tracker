@@ -5,7 +5,10 @@ import { Chart } from 'react-chartjs-2';
 import Loader from '@components/Loader/Loader';
 import TimelineModal from '@components/TimelineModal/TimelineModal';
 import { CHART_TITLE, CHART_X_TITLE, CHART_Y_TITLE } from '@constants/messages';
-import TimelineContext, { timelineColors } from '@store/TimelineContext';
+import TimelineContext, {
+  timelineColors,
+  TimelineContextType,
+} from '@store/TimelineContext';
 import {
   CategoryScale,
   Chart as ChartJS,
@@ -19,10 +22,7 @@ import {
   CandlestickController,
   CandlestickElement,
 } from 'chartjs-chart-financial';
-import {
-  FinancialChartProps,
-  TimelineContextType,
-} from 'interfaces/timeline.interface';
+import { FinancialChartProps } from 'interfaces/timeline.interface';
 
 ChartJS.register(
   CategoryScale,

@@ -27,6 +27,6 @@ export interface BankMapProps {
 export interface CurrencySearchProps {
   searchTerm: string;
   searchableCurrency: Currency[];
-  onSearch: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleSearch: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onSelectCurrency: (currency: Currency) => void;
 }

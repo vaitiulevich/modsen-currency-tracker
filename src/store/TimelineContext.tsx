@@ -1,10 +1,15 @@
 import { createContext, ReactNode, useContext, useState } from 'react';
 import { CACHE_KEY } from '@constants/cache';
 import { ERR_TIMLINE_CONTEXT } from '@constants/messages';
-import {
-  TimelineContextType,
-  TimelineData,
-} from 'interfaces/timeline.interface';
+import { TimelineData } from 'interfaces/timeline.interface';
+
+export interface TimelineContextType {
+  data: TimelineData[];
+  addData: (newData: TimelineData) => void;
+  setTimlineData: (newData: TimelineData[]) => void;
+  currentFinance: TimelineData;
+  onSetCurrentFinance: (newFinance: TimelineData) => void;
+}
 
 const TimelineContext = createContext<TimelineContextType | undefined>(
   undefined,

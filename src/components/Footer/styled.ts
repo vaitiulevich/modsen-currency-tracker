@@ -21,7 +21,7 @@ export const FooterContainer = styled.footer`
 
 export const FooterContent = styled.div`
   width: 35%;
-  @media (max-width: ${breakpoints.mobile}px) {
+  @media (max-width: ${breakpoints.tablet}px) {
     width: auto;
   }
 `;
@@ -37,6 +37,10 @@ export const LogoTitle = styled.h2`
   margin-left: 1rem;
   font-size: ${(props) => props.theme.typography.fontSize.average};
   font-weight: ${(props) => props.theme.typography.fontWeight.bold};
+
+  @media (max-width: ${breakpoints.mobile}px) {
+    font-size: ${(props) => props.theme.typography.fontSize.medium};
+  }
 `;
 export const LogoHeadline = styled.div`
   display: flex;
@@ -47,7 +51,7 @@ export const TopFooter = styled.div`
   display: flex;
   justify-content: space-between;
 
-  @media (max-width: ${breakpoints.mobile}px) {
+  @media (max-width: ${breakpoints.tablet}px) {
     flex-direction: column;
   }
 `;
@@ -57,7 +61,7 @@ export const LinksContainer = styled.div`
   justify-content: space-between;
   width: 50%;
   max-width: 1200px;
-  @media (max-width: ${breakpoints.mobile}px) {
+  @media (max-width: ${breakpoints.tablet}px) {
     width: auto;
   }
 `;
@@ -69,6 +73,10 @@ export const Column = styled.div`
   h3 {
     font-size: ${(props) => props.theme.typography.fontSize.average};
     margin-bottom: 0.5rem;
+  }
+
+  @media (max-width: ${breakpoints.tablet}px) {
+    margin: 0;
   }
 `;
 

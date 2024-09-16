@@ -14,14 +14,13 @@ import {
   DATE_MIN_OFFSET,
   INITIAL_CURRENCY,
 } from '@constants/timeline';
-import TimelineContext from '@store/TimelineContext';
+import TimelineContext, { TimelineContextType } from '@store/TimelineContext';
 import { getDateRange } from '@utils/dateHelpers';
 import { getCurrencyHistory } from '@utils/getCurrencyHistory';
 import { notificationService } from '@utils/NotificationService';
 import {
   FetchDataPoint,
   TimelineChartState,
-  TimelineContextType,
   TimelineData,
 } from 'interfaces/timeline.interface';
 

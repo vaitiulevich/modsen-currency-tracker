@@ -39,14 +39,6 @@ export interface CurrencySelectorProps {
   handleSetCurrency: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
-export interface TimelineContextType {
-  data: TimelineData[];
-  addData: (newData: TimelineData) => void;
-  setTimlineData: (newData: TimelineData[]) => void;
-  currentFinance: TimelineData;
-  onSetCurrentFinance: (newFinance: TimelineData) => void;
-}
-
 export interface TimelineFormProps {
   onSubmit: (
     e: React.FormEvent<HTMLFormElement>,

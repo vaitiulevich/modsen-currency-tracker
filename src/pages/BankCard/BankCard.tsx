@@ -27,7 +27,7 @@ class BankCard extends Component<{}, BankCardState> {
     }));
   }
 
-  onSetSearchableCurrency = (searchTerm: string) => {
+  handleSearchableCurrencySearch = (searchTerm: string) => {
     const { currencyList } = this.context;
 
     const searchableCurrency = currencyList.filter(
@@ -35,7 +35,6 @@ class BankCard extends Component<{}, BankCardState> {
         includesNormalizeStr(currency.name, searchTerm) ||
         includesNormalizeStr(currency.code, searchTerm),
     );
-
     this.setState((prevState) => ({
       ...prevState,
       searchableCurrency,
@@ -49,7 +48,7 @@ class BankCard extends Component<{}, BankCardState> {
         ...prevState,
         searchTerm,
       }),
-      () => this.onSetSearchableCurrency(searchTerm),
+      () => this.handleSearchableCurrencySearch(searchTerm),
     );
   };
 
@@ -64,7 +63,6 @@ class BankCard extends Component<{}, BankCardState> {
           includesNormalizeStr(curr, code.toLowerCase()),
         ),
     );
-    console.log(filteredBanks);
     this.setState((prevState) => ({
       ...prevState,
       banks: filteredBanks,
@@ -78,7 +76,7 @@ class BankCard extends Component<{}, BankCardState> {
         <CurrencySearch
           searchTerm={searchTerm}
           searchableCurrency={searchableCurrency}
-          onSearch={this.handleSearch}
+          handleSearch={this.handleSearch}
           onSelectCurrency={this.onSetCurrency}
         />
         <BankMap banks={banks} center={CENTER_MAP} />

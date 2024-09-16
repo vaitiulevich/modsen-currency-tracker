@@ -6,6 +6,16 @@ export interface TimelineData {
   c: number;
 }
 
+export interface TimelineModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+export interface TimelineModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
 export interface FetchDataPoint {
   price_close: number;
   price_high: number;
@@ -16,6 +26,7 @@ export interface FetchDataPoint {
 
 export interface TimelineChartState {
   isShowNotification: boolean;
+  notificationMessage: string;
 }
 
 export interface FinancialChartProps {
@@ -25,7 +36,7 @@ export interface FinancialChartProps {
 }
 
 export interface CurrencySelectorProps {
-  onSetCurrency: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  handleSetCurrency: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
 export interface TimelineContextType {

@@ -4,8 +4,18 @@ import { ChangeEvent, Component } from 'react';
 import CurrencySelector from '@components/CurrencySelector/CurrencySelector';
 import FinancialChart from '@components/FinancialChart/FinancialChart';
 import Notification from '@components/Notification/Notification';
-import { SUCCESS_COMLITED_NOTIFICATION } from '@constants/messages';
+import {
+  ERR_FEATCH_DATA_MESS,
+  ERROR_NOTIFICATION,
+  SUCCESS_COMLITED_NOTIFICATION,
+} from '@constants/messages';
+import {
+  DATE_MAX_OFFSET,
+  DATE_MIN_OFFSET,
+  INITIAL_CURRENCY,
+} from '@constants/timeline';
 import TimelineContext from '@store/TimelineContext';
+import { getDateRange } from '@utils/dateHelpers';
 import { getCurrencyHistory } from '@utils/getCurrencyHistory';
 import { notificationService } from '@utils/NotificationService';
 import {
@@ -23,64 +33,73 @@ class Timeline extends Component<{}, TimelineChartState> {
 
   state: TimelineChartState = {
     isShowNotification: false,
+    notificationMessage: '',
   };
 
-  onFetchCurrencyData = async (currency: string) => {
-    const currencyHistory = getCurrencyHistory(currency);
-    const transformedData: TimelineData[] = currencyHistory.map(
-      (item: FetchDataPoint) => ({
-        x: new Date(item.time_close),
-        o: item.price_open,
-        h: item.price_high,
-        l: item.price_low,
-        c: item.price_close,
-      }),
-    );
-    this.context.setTimlineData(transformedData);
-    notificationService.notify();
+  fetchCurrencyData = (currency: string) => {
+    try {
+      const currencyHistory = getCurrencyHistory(currency);
+      const transformedData: TimelineData[] = currencyHistory.map(
+        (item: FetchDataPoint) => ({
+          x: new Date(item.time_close),
+          o: item.price_open,
+          h: item.price_high,
+          l: item.price_low,
+          c: item.price_close,
+        }),
+      );
+
+      this.context.setTimlineData(transformedData);
+      notificationService.notify();
+
+      this.setState((prev) => ({
+        ...prev,
+        notificationMessage: SUCCESS_COMLITED_NOTIFICATION,
+      }));
+    } catch (error) {
+      this.setState({
+        notificationMessage: ERROR_NOTIFICATION,
+        isShowNotification: true,
+      });
+      console.error(ERR_FEATCH_DATA_MESS, error);
+    }
   };
 
   componentDidMount() {
-    notificationService.subscribe(this.onShowNotification);
-    this.onFetchCurrencyData('ARS');
+    notificationService.subscribe(this.handleShowNotification);
+    this.fetchCurrencyData(INITIAL_CURRENCY);
   }
 
   componentWillUnmount() {
-    notificationService.unsubscribe(this.onShowNotification);
+    notificationService.unsubscribe(this.handleShowNotification);
   }
 
-  onShowNotification = () => {
+  handleShowNotification = () => {
     this.setState({ isShowNotification: true });
 
     setTimeout(() => this.setState({ isShowNotification: false }), 2000);
   };
 
-  onSetCurrency = (e: ChangeEvent<HTMLSelectElement>) => {
-    this.onFetchCurrencyData(e.target.value);
+  handleSetCurrency = (e: ChangeEvent<HTMLSelectElement>) => {
+    this.fetchCurrencyData(e.target.value);
   };
 
   render() {
     const { data } = this.context;
-    const { isShowNotification } = this.state;
-    const dateMin = new Date();
-    dateMin.setDate(dateMin.getDate() - 30);
+    const { isShowNotification, notificationMessage } = this.state;
 
-    const dateMax = new Date();
-    dateMax.setDate(dateMax.getDate() + 2);
+    const { dateMin, dateMax } = getDateRange(DATE_MIN_OFFSET, DATE_MAX_OFFSET);
+
     return (
       <TimelineContainer>
         {isShowNotification && (
           <Notification
-            message={SUCCESS_COMLITED_NOTIFICATION}
+            message={notificationMessage}
             onClose={() => this.setState({ isShowNotification: false })}
           />
         )}
-        <CurrencySelector onSetCurrency={this.onSetCurrency} />
-        <FinancialChart
-          dateMin={dateMin.getTime()}
-          dateMax={dateMax.getTime()}
-          data={data}
-        />
+        <CurrencySelector handleSetCurrency={this.handleSetCurrency} />
+        <FinancialChart dateMin={dateMin} dateMax={dateMax} data={data} />
       </TimelineContainer>
     );
   }

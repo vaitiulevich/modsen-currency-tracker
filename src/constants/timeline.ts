@@ -35,3 +35,9 @@ export const timelineFormFields = [
     readonly: false,
   },
 ];
+
+export const INITIAL_CURRENCY = 'ARS';
+export const DATE_MIN_OFFSET = 30;
+export const DATE_MAX_OFFSET = 2;
+
+export const VALIDATION_PATTERN = /^\d*([.,]\d{0,7})?$/;

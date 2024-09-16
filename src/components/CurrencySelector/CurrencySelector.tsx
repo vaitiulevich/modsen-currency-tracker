@@ -1,8 +1,9 @@
-import { ChangeEvent, useContext, useEffect, useState } from 'react';
-import { CurrencyContext } from '@store/CurrencyContext';
+import { ChangeEvent, useEffect, useState } from 'react';
+import { NO_CURRENCY } from '@constants/messages';
+import { useCurrencyContext } from '@utils/hooks/useCurrencyContext';
 import useLoadImage from '@utils/hooks/useLoadImage';
+import { Currency } from 'interfaces/currency.inteface';
 import { CurrencySelectorProps } from 'interfaces/timeline.interface';
-import PropTypes from 'prop-types';
 
 import {
   ContentCurrencyPanel,
@@ -12,37 +13,48 @@ import {
   TitleCurrencyPanel,
 } from './styled';
 
-const CurrencySelector = ({ onSetCurrency }: CurrencySelectorProps) => {
-  const context = useContext(CurrencyContext);
-  const [selectedCurrency, setSelectedCurrency] = useState(
-    context?.currencyList[0],
+const CurrencySelector = ({ handleSetCurrency }: CurrencySelectorProps) => {
+  const { currencyList } = useCurrencyContext();
+
+  const [selectedCurrency, setSelectedCurrency] = useState<Currency>(
+    currencyList[0],
   );
   const { imageUrl } = useLoadImage(selectedCurrency?.code);
 
   useEffect(() => {
-    if (context?.currencyList && context.currencyList.length > 0) {
-      setSelectedCurrency(context.currencyList[0]);
+    if (currencyList && currencyList.length) {
+      setSelectedCurrency(currencyList[0]);
     }
-  }, [context?.currencyList]);
+  }, [currencyList]);
 
-  const onSelectCurrency = (e: ChangeEvent<HTMLSelectElement>) => {
-    setSelectedCurrency(
-      context?.currencyList.find((item) => item.code === e.target.value),
-    );
-    onSetCurrency(e);
+  const findCurrencyByCode = (code: string) => {
+    return currencyList.find((item) => item.code === code);
+  };
+
+  const handleSelectCurrency = (e: ChangeEvent<HTMLSelectElement>) => {
+    const selectedCurrency = findCurrencyByCode(e.target.value) ?? {};
+    setSelectedCurrency(selectedCurrency);
+    handleSetCurrency(e);
+  };
+  const renderCurrencyOptions = () => {
+    if (!currencyList || currencyList.length === 0) {
+      return <option disabled>{NO_CURRENCY}</option>;
+    }
+
+    return currencyList.map((item) => (
+      <option key={item.code} value={item.code}>
+        {item.name}
+      </option>
+    ));
   };
 
   return (
     <div>
       <CurrencySelect
         defaultValue={selectedCurrency?.code}
-        onChange={onSelectCurrency}
+        onChange={handleSelectCurrency}
       >
-        {context?.currencyList.map((item) => (
-          <option key={item.code} value={item.code}>
-            {item.name}
-          </option>
-        ))}
+        {renderCurrencyOptions()}
       </CurrencySelect>
       <CurrentCurrencyPanel>
         {imageUrl && <img src={imageUrl} alt="currency" />}
@@ -55,10 +67,6 @@ const CurrencySelector = ({ onSetCurrency }: CurrencySelectorProps) => {
       </CurrentCurrencyPanel>
     </div>
   );
-};
-
-CurrencySelector.propTypes = {
-  onSetCurrency: PropTypes.func.isRequired,
 };
 
 export default CurrencySelector;

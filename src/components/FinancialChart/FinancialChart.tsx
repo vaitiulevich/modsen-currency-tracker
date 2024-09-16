@@ -3,7 +3,7 @@ import 'chartjs-adapter-date-fns';
 import { Component, MouseEvent } from 'react';
 import { Chart } from 'react-chartjs-2';
 import Loader from '@components/Loader/Loader';
-import TimlineModal from '@components/TimlineModal/TimlineModal';
+import TimelineModal from '@components/TimelineModal/TimelineModal';
 import { CHART_TITLE, CHART_X_TITLE, CHART_Y_TITLE } from '@constants/messages';
 import TimelineContext, { timelineColors } from '@store/TimelineContext';
 import {
@@ -55,11 +55,10 @@ class FinancialChart extends Component<FinancialChartProps> {
   closeModal = () => {
     this.setState({ isModalOpen: false });
   };
+  getChartOptions = (): ChartOptions<'candlestick'> => {
+    const { dateMin, dateMax } = this.props;
 
-  render() {
-    const { data, dateMin, dateMax } = this.props;
-
-    const options: ChartOptions<'candlestick'> = {
+    return {
       responsive: true,
       plugins: {
         title: {
@@ -95,6 +94,45 @@ class FinancialChart extends Component<FinancialChartProps> {
         },
       },
     };
+  };
+
+  handleClick = (event: MouseEvent<HTMLCanvasElement>) => {
+    const chart = ChartJS.getChart(
+      event.nativeEvent.target as HTMLCanvasElement,
+    );
+
+    if (!chart) {
+      return;
+    }
+
+    const points = chart.getElementsAtEventForMode(
+      event.nativeEvent,
+      'nearest',
+      { intersect: true },
+      false,
+    );
+
+    if (points.length) {
+      const firstPoint = points[0];
+      const datasetIndex = firstPoint.index;
+
+      const clickedData = this.props.data[datasetIndex];
+
+      this.context.onSetCurrentFinance({
+        x: clickedData.x,
+        o: clickedData.o,
+        h: clickedData.h,
+        l: clickedData.l,
+        c: clickedData.c,
+      });
+      this.setState({
+        isModalOpen: true,
+      });
+    }
+  };
+  render() {
+    const { data } = this.props;
+    const hasSufficientData = data.length > 2;
 
     const datasets = [
       {
@@ -106,56 +144,20 @@ class FinancialChart extends Component<FinancialChartProps> {
       },
     ];
 
-    const handleClick = (event: MouseEvent<HTMLCanvasElement>) => {
-      const chart = ChartJS.getChart(
-        event.nativeEvent.target as HTMLCanvasElement,
-      );
-
-      if (!chart) {
-        return;
-      }
-
-      const points = chart.getElementsAtEventForMode(
-        event.nativeEvent,
-        'nearest',
-        { intersect: true },
-        false,
-      );
-
-      if (points.length) {
-        const firstPoint = points[0];
-        const datasetIndex = firstPoint.datasetIndex;
-        const dataIndex = firstPoint.index;
-
-        const clickedData = datasets[datasetIndex].data[dataIndex];
-
-        this.context.onSetCurrentFinance({
-          x: clickedData.x,
-          o: clickedData.o,
-          h: clickedData.h,
-          l: clickedData.l,
-          c: clickedData.c,
-        });
-        this.setState({
-          isModalOpen: true,
-        });
-      }
-    };
-
     return (
       <div>
-        <TimlineModal
+        <TimelineModal
           isOpen={this.state.isModalOpen}
           onClose={this.closeModal}
         />
-        {data.length > 2 ? (
+        {hasSufficientData ? (
           <Chart
             type="candlestick"
             data={{
               datasets,
             }}
-            onClick={handleClick}
-            options={options}
+            onClick={this.handleClick}
+            options={this.getChartOptions()}
           />
         ) : (
           <Loader />

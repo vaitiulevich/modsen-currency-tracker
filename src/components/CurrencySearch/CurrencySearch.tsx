@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { images } from '@constants/images';
-import { searchInputPlaceholder } from '@constants/messages';
+import { NO_CURRENCY, searchInputPlaceholder } from '@constants/messages';
 import { CurrencySearchProps } from 'interfaces/banks.interface';
 import { Currency } from 'interfaces/currency.inteface';
 
@@ -40,7 +40,12 @@ class CurrencySearch extends Component<
 
   renderCurrencyList() {
     const { searchableCurrency } = this.props;
+    console.log(searchableCurrency);
+    if (searchableCurrency.length === 0) {
+      console.log(searchableCurrency);
 
+      return <CurrencyListItem>{NO_CURRENCY}</CurrencyListItem>;
+    }
     return (
       <CurrencyList>
         {searchableCurrency.map((currency) => (

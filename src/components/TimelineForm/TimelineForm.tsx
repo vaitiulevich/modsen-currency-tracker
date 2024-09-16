@@ -1,6 +1,7 @@
-import { ChangeEvent, Component, FormEvent } from 'react';
+import { ChangeEvent, FormEvent, PureComponent } from 'react';
 import { timelineFormFields } from '@constants/timeline';
 import TimelineContext from '@store/TimelineContext';
+import { validateInput } from '@utils/validation';
 import {
   TimelineContextType,
   TimelineData,
@@ -16,7 +17,7 @@ import {
   SubmitButton,
 } from './styled';
 
-class TimelineForm extends Component<TimelineFormProps, TimelineFormState> {
+class TimelineForm extends PureComponent<TimelineFormProps, TimelineFormState> {
   static contextType = TimelineContext;
   context!: TimelineContextType;
 
@@ -28,69 +29,61 @@ class TimelineForm extends Component<TimelineFormProps, TimelineFormState> {
     };
   }
 
-  validateInput = (name: string, value: string) => {
-    const errors: { [key: string]: string } = {};
-    const numberPattern = /^\d*([.,]\d{0,7})?$/;
-
-    if (value.trim() === '') {
-      errors[name] = 'Empty value';
-    }
-
-    if (!numberPattern.test(value)) {
-      errors[name] = 'Invalid value';
-    } else {
-      const numericValue = parseFloat(value.replace(',', '.'));
-      if (numericValue <= 0) {
-        errors[name] = 'The minimum value is greater than 0.';
-      }
-      if (numericValue >= 1000000) {
-        errors[name] = 'The maximum value is not greater than 1000000.';
-      }
-    }
-
-    this.setState({ errors });
-  };
-
   handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    this.setState((prevState) => ({
-      timelineData: { ...prevState.timelineData, [name]: +value },
+    const errors = validateInput({ name, value });
+    this.setState((prev) => ({
+      ...prev,
+      errors,
     }));
-    this.validateInput(name, value);
+    this.setState((prevState) => ({
+      ...prevState,
+      timelineData: {
+        ...prevState.timelineData,
+        [name]: +value ? +value : value,
+      },
+    }));
   };
 
   handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    this.props.onSubmit(e, this.state.timelineData);
+    const { timelineData } = this.state;
+    this.props.onSubmit(e, timelineData);
   };
 
+  renderFields() {
+    const { errors, timelineData } = this.state;
+
+    return timelineFormFields.map(
+      ({ name, fulltitle, type, readonly, required }) => (
+        <FormCurrencyInpPanel key={name}>
+          <label>{fulltitle}</label>
+          <FormCurrencyInput
+            readOnly={readonly}
+            type={type}
+            name={name}
+            value={
+              name in timelineData
+                ? String(timelineData[name as keyof TimelineData])
+                : ''
+            }
+            placeholder={fulltitle}
+            onChange={this.handleChange}
+            required={required}
+          />
+          {errors[name] && <ErrorMessage>{errors[name]}</ErrorMessage>}
+        </FormCurrencyInpPanel>
+      ),
+    );
+  }
+
   render() {
+    const { errors } = this.state;
+    const hasErrors = Object.keys(errors).length !== 0;
     return (
       <FormCurrency onSubmit={this.handleSubmit}>
-        {timelineFormFields.map((field, ind) => (
-          <FormCurrencyInpPanel key={ind}>
-            <label>{field.fulltitle}</label>
-            <FormCurrencyInput
-              readOnly={field.readonly}
-              key={field.name}
-              type={field.type}
-              name={field.name}
-              placeholder={field.fulltitle}
-              defaultValue={
-                this.state.timelineData[field.name as keyof TimelineData] + ''
-              }
-              onChange={this.handleChange}
-              required={field.required}
-            />
-            {this.state.errors[field.name] && (
-              <ErrorMessage>{this.state.errors[field.name]}</ErrorMessage>
-            )}
-          </FormCurrencyInpPanel>
-        ))}
-        <SubmitButton
-          disabled={Object.keys(this.state.errors).length !== 0}
-          type="submit"
-        >
+        {this.renderFields()}
+        <SubmitButton disabled={hasErrors} type="submit">
           Change
         </SubmitButton>
       </FormCurrency>

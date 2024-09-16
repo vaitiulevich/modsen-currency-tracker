@@ -48,5 +48,6 @@ export const SubmitButton = styled.button`
 `;
 export const FormCurrencyInpPanel = styled.div`
   width: 100%;
+  height: 6rem;
   text-align: start;
 `;

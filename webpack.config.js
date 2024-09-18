@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV === 'production';
 module.exports = {
@@ -58,15 +59,11 @@ module.exports = {
         use: [
           {
             loader: 'url-loader',
-            options: {
-              limit: 8192,
-              mimetype: 'image/svg+xml',
-              name: 'assets/icons/[name].[hash:8].[ext]',
-            },
-          },
-          {
-            loader: 'svg-inline-loader',
-          },
+              options: {
+                limit: 10000, 
+                mimetype: 'image/svg+xml',
+              },
+          }
         ],
       },
     ],
@@ -82,6 +79,20 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './public/index.html',
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, 'assets/**/*'),
+          to: path.resolve(__dirname, 'build/assets'),
+          noErrorOnMissing: true,
+        },
+        {
+          from: path.resolve(__dirname, 'assets/icon/**/*'),
+          to: path.resolve(__dirname, 'build/assets/icon'),
+          noErrorOnMissing: true,
+        },
+      ],
     }),
   ],
 };

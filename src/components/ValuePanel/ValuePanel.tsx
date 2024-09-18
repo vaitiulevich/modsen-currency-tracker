@@ -33,6 +33,7 @@ const ValuePanel = ({ item, value, isCurrency }: CurrencyPanelProps) => {
         conversionData={{ code: item.code ?? '', value }}
       />
       <ValuePanelContainer
+        data-testid={isCurrency ? 'value-panel-container' : ''}
         iscurrency={isCurrency ? isCurrency : false}
         onClick={toggleModal}
       >

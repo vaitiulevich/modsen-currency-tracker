@@ -6,7 +6,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 module.exports = {
   entry: './src/index.tsx',
   output: {
-    filename: 'bundle.js',
+    filename: '[name].[contenthash].bundle.js',
     path: path.resolve(__dirname, 'build'),
     publicPath: isProduction ? '/modsen-currency-tracker/' : '/',
   },
@@ -25,7 +25,7 @@ module.exports = {
     },
     modules: ['.', 'node_modules'],
   },
-  plugins: [
+    plugins: [
     new HtmlWebpackPlugin({
       template: './public/index.html',
     }),
@@ -35,7 +35,12 @@ module.exports = {
           from: path.resolve(__dirname, 'src/assets'),
           to: path.resolve(__dirname, 'build/assets'),
           noErrorOnMissing: true,
-        }
+        },
+        {
+          from: path.resolve(__dirname, 'src/assets/icons/**/*'),
+          to: path.resolve(__dirname, 'build/assets/icons'),
+          noErrorOnMissing: true,
+        },
       ],
     }),
   ],
@@ -74,8 +79,7 @@ module.exports = {
           {
             loader: 'url-loader',
               options: {
-                limit: 10000, 
-                mimetype: 'image/svg+xml',
+                name: '[path][name].[ext]',
               },
           }
         ],

@@ -2,8 +2,8 @@ import { memo } from 'react';
 import Loader from '@components/Loader/Loader';
 import ValuePanel from '@components/ValuePanel/ValuePanel';
 import { STOCKS_LIST } from '@constants/currency';
-import { useCurrencyContext } from '@utils/hooks/useCurrencyContext';
 import withScrollAnimation from '@utils/HOC/withScrollAnimation';
+import { useCurrencyContext } from '@utils/hooks/useCurrencyContext';
 
 import { AllCurrencyContainer, HomeContainer, Title } from './styled';
 

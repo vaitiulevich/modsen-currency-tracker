@@ -81,7 +81,7 @@ class BankCard extends Component<{}, BankCardState> {
           handleSearch={this.handleSearch}
           onSelectCurrency={this.onSetCurrency}
         />
-        {/* <BankMap banks={banks} center={CENTER_MAP} /> */}
+        <BankMap banks={banks} center={CENTER_MAP} />
       </div>
     );
   }

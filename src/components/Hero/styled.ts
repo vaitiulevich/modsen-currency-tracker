@@ -28,8 +28,8 @@ export const HeroContainer = styled.section`
   align-items: center;
   justify-content: space-around;
 
-  @media (max-width: ${breakpoints.tablet}px) {
-    padding: ${(props) => props.theme.indents.containerPaddingLaptop};
+  @media (max-width: ${breakpoints.desktop}px) {
+    padding: 0;
   }
   @media (max-width: ${breakpoints.mobile}px) {
     padding: ${(props) => props.theme.indents.containerPaddingMobile};
@@ -38,6 +38,10 @@ export const HeroContainer = styled.section`
 
 export const HeroLogo = styled.div`
   height: 17rem;
+
+  img {
+    width: calc(calc(1vw + 1vh) * 14);
+  }
 
   @media (max-width: ${breakpoints.tablet}px) {
     height: 15rem;

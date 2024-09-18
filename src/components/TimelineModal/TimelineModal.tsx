@@ -1,4 +1,5 @@
 import { FormEvent, memo, useCallback } from 'react';
+import ReactDOM from 'react-dom';
 import TimelineForm from '@components/TimelineForm/TimelineForm';
 import { useTimelineContext } from '@store/TimelineContext';
 import {
@@ -27,7 +28,7 @@ const TimelineModal = ({ isOpen, onClose }: TimelineModalProps) => {
     [addData, onClose],
   );
 
-  return (
+  const modalContent = (
     <Overlay>
       <ModalContent>
         <ModalHeader>
@@ -38,6 +39,11 @@ const TimelineModal = ({ isOpen, onClose }: TimelineModalProps) => {
         <TimelineForm onSubmit={onSubmit} currentFinance={currentFinance} />
       </ModalContent>
     </Overlay>
+  );
+
+  return ReactDOM.createPortal(
+    modalContent,
+    document.getElementById('modal-root')!,
   );
 };
 

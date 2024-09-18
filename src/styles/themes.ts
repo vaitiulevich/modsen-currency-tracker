@@ -34,7 +34,7 @@ export const darkTheme: DefaultTheme = {
   },
   indents: {
     containerPaddingDesctop: '1rem 20%',
-    containerPaddingLaptop: '1rem 8%',
+    containerPaddingLaptop: '1rem 6%',
     containerPaddingMobile: '1rem 4%',
   },
   border: {
@@ -78,7 +78,7 @@ export const lightTheme: DefaultTheme = {
   },
   indents: {
     containerPaddingDesctop: '1rem 20%',
-    containerPaddingLaptop: '1rem 8%',
+    containerPaddingLaptop: '1rem 6%',
     containerPaddingMobile: '1rem 4%',
   },
   border: {

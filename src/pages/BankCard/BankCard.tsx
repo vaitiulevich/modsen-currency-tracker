@@ -4,8 +4,8 @@ import CurrencySearch from '@components/CurrencySearch/CurrencySearch';
 import { allBanks } from '@constants/banks';
 import { CENTER_MAP } from '@constants/map';
 import { CurrencyContext, CurrencyContextType } from '@store/CurrencyContext';
-import { includesNormalizeStr } from '@utils/includesNormalizeStr';
 import withScrollAnimation from '@utils/HOC/withScrollAnimation';
+import { includesNormalizeStr } from '@utils/includesNormalizeStr';
 import { BankCardState } from 'interfaces/banks.interface';
 import { Currency } from 'interfaces/currency.inteface';
 
@@ -66,6 +66,7 @@ class BankCard extends Component<{}, BankCardState> {
     );
     this.setState((prevState) => ({
       ...prevState,
+      searchTerm: code,
       banks: filteredBanks,
     }));
   };
@@ -80,7 +81,7 @@ class BankCard extends Component<{}, BankCardState> {
           handleSearch={this.handleSearch}
           onSelectCurrency={this.onSetCurrency}
         />
-        <BankMap banks={banks} center={CENTER_MAP} />
+        {/* <BankMap banks={banks} center={CENTER_MAP} /> */}
       </div>
     );
   }

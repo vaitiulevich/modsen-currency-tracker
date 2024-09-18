@@ -1,7 +1,9 @@
+import { breakpoints } from '@constants/breakpoints';
 import styled from 'styled-components';
 
 export const MenuContainer = styled.div<{ isopen: boolean }>`
   display: block;
+  width: 60%;
   flex-direction: column;
   justify-content: flex-start;
   background: ${(props) => props.theme.colors.fillSecondary};
@@ -14,6 +16,9 @@ export const MenuContainer = styled.div<{ isopen: boolean }>`
   transition: transform 0.3s ease-in-out;
   transform: ${({ isopen }) => (isopen ? 'translateX(0)' : 'translateX(100%)')};
   z-index: 10;
+  @media (max-width: ${breakpoints.mobile}px) {
+    width: 100%;
+  }
 `;
 export const BurgerButton = styled.button<{ isopen: boolean }>`
   display: flex;
@@ -58,7 +63,7 @@ export const Overlay = styled.div<{ isopen: boolean }>`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: ${(props) => props.theme.colors.fillBackground}b6;
+  background-color: ${(props) => props.theme.colors.footerSecondaryFont}b6;
   z-index: 1;
   opacity: ${(props) => (props.isopen ? 1 : 0)};
   visibility: ${(props) => (props.isopen ? 'visible' : 'hidden')};

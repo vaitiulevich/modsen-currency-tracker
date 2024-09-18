@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import ReactDOM from 'react-dom';
 
 import { NotificationContainer, NotificationText } from './styled';
 
@@ -13,10 +14,14 @@ const Notification = ({ message, onClose }: NotificationProps) => {
     return () => clearTimeout(timer);
   }, [onClose]);
 
-  return (
+  const notificationContent = (
     <NotificationContainer>
       <NotificationText className="notification">{message}</NotificationText>
     </NotificationContainer>
+  );
+  return ReactDOM.createPortal(
+    notificationContent,
+    document.getElementById('modal-root')!,
   );
 };
 

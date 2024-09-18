@@ -4,6 +4,8 @@ export interface Bank {
   name: string;
   coordinates: [number, number];
   currency?: string[];
+  address: string;
+  timeWork: string;
 }
 
 export interface BankCoordinates {

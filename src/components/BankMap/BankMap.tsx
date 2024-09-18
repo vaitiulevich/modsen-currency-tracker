@@ -45,7 +45,15 @@ class BankMap extends Component<BankMapProps> {
     banks.forEach((bank) => {
       const marker = new mapboxgl.Marker()
         .setLngLat(bank.coordinates)
-        .setPopup(new mapboxgl.Popup().setText(bank.name))
+        .setPopup(
+          new mapboxgl.Popup().setHTML(`
+          <div>
+            <h3>${bank.name}</h3>
+            <p>Адрес: ${bank.address}</p>
+            <p>Рабочие часы: ${bank.timeWork}</p>
+          </div>
+        `),
+        )
         .addTo(this.map!);
       this.markers.push(marker);
     });

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import ReactDOM from 'react-dom';
 import { ALL_CURRENCY } from '@constants/currency';
 import { endPoints, URL_CURRENCY_API } from '@constants/urls';
 import { ConversionModalProps } from 'interfaces/convirsation.interface';
@@ -86,7 +87,7 @@ const ConversionModal = ({
 
   if (!isOpen) return null;
 
-  return (
+  const modalContent = (
     <Overlay>
       <ModalContent>
         <ModalTitle>Currency Exchange</ModalTitle>
@@ -144,6 +145,11 @@ const ConversionModal = ({
         </CloseButton>
       </ModalContent>
     </Overlay>
+  );
+
+  return ReactDOM.createPortal(
+    modalContent,
+    document.getElementById('modal-root')!,
   );
 };
 

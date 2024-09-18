@@ -50,6 +50,24 @@ class TimelineForm extends PureComponent<TimelineFormProps, TimelineFormState> {
     this.props.onSubmit(e, timelineData);
   };
 
+  getInputValue = (name: string) => {
+    const { timelineData } = this.state;
+
+    if (name === 'x') {
+      const dateValue = timelineData[name as keyof TimelineData];
+      return dateValue ? this.formatDate(new Date(dateValue)) : '';
+    }
+
+    return String(timelineData[name as keyof TimelineData] || '');
+  };
+
+  formatDate = (date: Date) => {
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
+
   renderFields() {
     const { errors, timelineData } = this.state;
 
@@ -61,11 +79,12 @@ class TimelineForm extends PureComponent<TimelineFormProps, TimelineFormState> {
             readOnly={readonly}
             type={type}
             name={name}
-            value={
-              name in timelineData
-                ? String(timelineData[name as keyof TimelineData])
-                : ''
-            }
+            // value={
+            //   name in timelineData
+            //     ? String(timelineData[name as keyof TimelineData])
+            //     : ''
+            // }
+            value={this.getInputValue(name)}
             placeholder={fulltitle}
             onChange={this.handleChange}
             required={required}

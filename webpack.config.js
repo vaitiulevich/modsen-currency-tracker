@@ -6,7 +6,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 module.exports = {
   entry: './src/index.tsx',
   output: {
-    filename: '[name].[contenthash].bundle.js',
+    filename: 'bundle.js',
     path: path.resolve(__dirname, 'build'),
     publicPath: isProduction ? '/modsen-currency-tracker/' : '/',
   },

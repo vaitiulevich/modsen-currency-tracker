@@ -89,7 +89,7 @@ module.exports = {
         },
         {
           from: path.resolve(__dirname, 'assets/icon/**/*'),
-          to: path.resolve(__dirname, 'build/assets/icon'),
+          to: path.resolve(__dirname, 'build/assets/icons'),
           noErrorOnMissing: true,
         },
       ],

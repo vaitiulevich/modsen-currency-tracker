@@ -8,7 +8,7 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'build'),
-    publicPath: isProduction ? '/modsen-currency-tracker/' : '/',
+    publicPath: isProduction ? './modsen-currency-tracker/' : '/',
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],

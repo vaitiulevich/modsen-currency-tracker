@@ -32,7 +32,7 @@ const withScrollAnimation = <P extends object>(
     }, []);
 
     return (
-      <Section ref={ref} isVisible={isVisible}>
+      <Section ref={ref} isvisible={isVisible}>
         <WrappedComponent {...props} />
       </Section>
     );

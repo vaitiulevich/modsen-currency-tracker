@@ -1,6 +1,6 @@
 import UpdatedStatus from '@components/UpdatedStatus/UpdatedStatus';
 import { images } from '@constants/images';
-import withScrollAnimation from 'HOC/withScrollAnimation';
+import withScrollAnimation from '@utils/HOC/withScrollAnimation';
 
 import {
   HeroContainer,

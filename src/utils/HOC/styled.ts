@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 interface AnimatedSectionProps {
-  isVisible: boolean;
+  isvisible: boolean;
 }
 
 export const Section = styled.div<AnimatedSectionProps>`
@@ -11,8 +11,8 @@ export const Section = styled.div<AnimatedSectionProps>`
     opacity 0.5s ease-out,
     transform 0.5s ease-out;
 
-  ${({ isVisible }) =>
-    isVisible &&
+  ${({ isvisible }) =>
+    isvisible &&
     css`
       opacity: 1;
       transform: translateY(0);

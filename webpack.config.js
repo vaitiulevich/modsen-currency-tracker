@@ -59,10 +59,13 @@ module.exports = {
           {
             loader: 'url-loader',
             options: {
-              limit: 10000,
+              limit: 8192,
               mimetype: 'image/svg+xml',
               name: 'assets/icons/[name].[hash:8].[ext]',
             },
+          },
+          {
+            loader: 'svg-inline-loader',
           },
         ],
       },

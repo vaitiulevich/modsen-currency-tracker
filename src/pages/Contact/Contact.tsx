@@ -1,6 +1,6 @@
 import ContactCard from '@components/ContactCard/ContactCard';
 import { contacts } from '@constants/contacts';
-import withScrollAnimation from 'HOC/withScrollAnimation';
+import withScrollAnimation from '@utils/HOC/withScrollAnimation';
 
 import { ContactContainer, ContactList, ContactTitle } from './styled';
 

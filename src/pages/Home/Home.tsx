@@ -3,7 +3,7 @@ import Loader from '@components/Loader/Loader';
 import ValuePanel from '@components/ValuePanel/ValuePanel';
 import { STOCKS_LIST } from '@constants/currency';
 import { useCurrencyContext } from '@utils/hooks/useCurrencyContext';
-import withScrollAnimation from 'HOC/withScrollAnimation';
+import withScrollAnimation from '@utils/HOC/withScrollAnimation';
 
 import { AllCurrencyContainer, HomeContainer, Title } from './styled';
 

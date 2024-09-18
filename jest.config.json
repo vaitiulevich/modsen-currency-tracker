@@ -2,7 +2,7 @@
   "preset": "ts-jest",
   "transform": {
     "^.+\\.jsx?$": "babel-jest",
-    "^.+\\.tsx?$": "babel-jest",
+    "^.+\\.tsx?$": "ts-jest",
     "^.+\\.(js|ts)$": "babel-jest",
     "^.+\\.svg$": "<rootDir>/src/svgTransform.js"
   },

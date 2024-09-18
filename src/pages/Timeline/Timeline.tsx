@@ -17,8 +17,8 @@ import {
 import TimelineContext, { TimelineContextType } from '@store/TimelineContext';
 import { getDateRange } from '@utils/dateHelpers';
 import { getCurrencyHistory } from '@utils/getCurrencyHistory';
+import withScrollAnimation from '@utils/HOC/withScrollAnimation';
 import { notificationService } from '@utils/NotificationService';
-import withScrollAnimation from 'HOC/withScrollAnimation';
 import {
   FetchDataPoint,
   TimelineChartState,

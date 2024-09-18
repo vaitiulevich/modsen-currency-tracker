@@ -2,7 +2,7 @@ import { memo } from 'react';
 
 import { ToggleContainer, ToggleInput, ToggleSlider } from './styled';
 
-interface ToggleSwitchProps {
+export interface ToggleSwitchProps {
   checked: boolean;
   onChange: () => void;
 }

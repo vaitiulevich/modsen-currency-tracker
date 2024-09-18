@@ -112,8 +112,9 @@ const ConversionModal = ({
         )}
 
         <ModalInputPanel>
-          <label>Amount:</label>
+          <label htmlFor="amount">Amount:</label>
           <ModalInput
+            id="amount"
             type="number"
             min="0.01"
             step="0.01"

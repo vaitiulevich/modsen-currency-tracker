@@ -5,7 +5,7 @@ import { allBanks } from '@constants/banks';
 import { CENTER_MAP } from '@constants/map';
 import { CurrencyContext, CurrencyContextType } from '@store/CurrencyContext';
 import { includesNormalizeStr } from '@utils/includesNormalizeStr';
-import withScrollAnimation from 'HOC/withScrollAnimation';
+import withScrollAnimation from '@utils/HOC/withScrollAnimation';
 import { BankCardState } from 'interfaces/banks.interface';
 import { Currency } from 'interfaces/currency.inteface';
 

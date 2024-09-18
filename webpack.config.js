@@ -25,6 +25,20 @@ module.exports = {
     },
     modules: ['.', 'node_modules'],
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './public/index.html',
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, 'src/assets'),
+          to: path.resolve(__dirname, 'build/assets'),
+          noErrorOnMissing: true,
+        }
+      ],
+    }),
+  ],
   module: {
     rules: [
       {
@@ -76,23 +90,5 @@ module.exports = {
     port: 3000,
     historyApiFallback: true,
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: './public/index.html',
-    }),
-    new CopyWebpackPlugin({
-      patterns: [
-        {
-          from: path.resolve(__dirname, 'assets/**/*'),
-          to: path.resolve(__dirname, 'build/assets'),
-          noErrorOnMissing: true,
-        },
-        {
-          from: path.resolve(__dirname, 'assets/icons/**/*'),
-          to: path.resolve(__dirname, 'build/assets/icons'),
-          noErrorOnMissing: true,
-        },
-      ],
-    }),
-  ],
+
 };

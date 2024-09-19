@@ -66,7 +66,7 @@ class BankCard extends Component<{}, BankCardState> {
     );
     this.setState((prevState) => ({
       ...prevState,
-      searchTerm: code,
+      searchTerm: currency.name ?? '',
       banks: filteredBanks,
     }));
   };

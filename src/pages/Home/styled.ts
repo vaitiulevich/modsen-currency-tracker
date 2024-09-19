@@ -15,6 +15,9 @@ export const AllCurrencyContainer = styled.div`
   grid-template-columns: repeat(2, 1fr);
   gap: 2rem 6rem;
 
+  @media (max-width: ${breakpoints.tablet}px) {
+    gap: 1rem;
+  }
   @media (max-width: ${breakpoints.mobile}px) {
     grid-template-columns: repeat(1, 1fr);
   }

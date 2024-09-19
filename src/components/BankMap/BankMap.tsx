@@ -47,7 +47,12 @@ class BankMap extends Component<BankMapProps> {
         .setLngLat(bank.coordinates)
         .setPopup(
           new mapboxgl.Popup().setHTML(`
-          <div>
+            <style>
+        .popup-content {
+          color:black;
+        }
+      </style>
+          <div class="popup-content">
             <h3>${bank.name}</h3>
             <p>Адрес: ${bank.address}</p>
             <p>Рабочие часы: ${bank.timeWork}</p>

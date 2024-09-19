@@ -54,13 +54,12 @@ export const getCurrencyHistory = (
   const cacheExpiration = localStorage.getItem(CACHE_EXPIRATION_KEY);
   const cachedData = localStorage.getItem(CACHE_KEY);
   const cachedCurrency = localStorage.getItem(CURRENCY_KEY);
-
-  if (
+  const isCacheValid =
     cacheExpiration &&
     now < +cacheExpiration &&
     cachedData &&
-    cachedCurrency === selectedCurrency
-  ) {
+    cachedCurrency === selectedCurrency;
+  if (isCacheValid) {
     return JSON.parse(cachedData);
   } else {
     const newHistory = generateCurrencyDataFor30Days();

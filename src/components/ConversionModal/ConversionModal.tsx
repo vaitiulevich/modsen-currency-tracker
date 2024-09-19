@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
-import { ALL_CURRENCY } from '@constants/currency';
+import { ALL_CURRENCY, CurrencyCodes } from '@constants/currency';
 import { endPoints, URL_CURRENCY_API } from '@constants/urls';
 import { ConversionModalProps } from 'interfaces/convirsation.interface';
 import PropTypes from 'prop-types';
@@ -19,9 +19,9 @@ import {
 } from './styled';
 
 const ConversionModal = ({
-  isOpen,
-  onRequestClose,
-  conversionData,
+  isOpen = false,
+  onRequestClose = () => {},
+  conversionData = { code: CurrencyCodes.USD, value: 0 },
 }: ConversionModalProps) => {
   const storedData =
     localStorage.getItem(URL_CURRENCY_API + endPoints.latestCurrency) ?? '{}';
@@ -50,7 +50,7 @@ const ConversionModal = ({
   const onExchangeRates = async () => {
     let finalAmount;
 
-    if (conversionData.code === 'USD') {
+    if (conversionData.code === CurrencyCodes.USD) {
       finalAmount =
         +currencyAmount *
         +AllCurrencyExchange.data.data[currencyExchange].value;

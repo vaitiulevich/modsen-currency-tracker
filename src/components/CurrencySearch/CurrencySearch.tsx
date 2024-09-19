@@ -18,6 +18,8 @@ class CurrencySearch extends PureComponent<
   CurrencySearchProps,
   { isFocused: boolean }
 > {
+  private blurTimeout: NodeJS.Timeout | null = null;
+
   constructor(props: CurrencySearchProps) {
     super(props);
     this.state = {
@@ -25,8 +27,14 @@ class CurrencySearch extends PureComponent<
     };
   }
 
+  componentWillUnmount() {
+    if (this.blurTimeout) {
+      clearTimeout(this.blurTimeout);
+    }
+  }
+
   handleBlur = () => {
-    setTimeout(() => {
+    this.blurTimeout = setTimeout(() => {
       this.setState({ isFocused: false });
     }, 300);
   };
@@ -58,6 +66,17 @@ class CurrencySearch extends PureComponent<
           </CurrencyListItem>
         ))}
       </CurrencyList>
+    );
+  }
+
+  shouldComponentUpdate(
+    nextProps: CurrencySearchProps,
+    nextState: { isFocused: boolean },
+  ) {
+    return (
+      nextProps.searchTerm !== this.props.searchTerm ||
+      nextProps.searchableCurrency !== this.props.searchableCurrency ||
+      nextState.isFocused !== this.state.isFocused
     );
   }
 

@@ -1,13 +1,18 @@
 import { memo, useState } from 'react';
 import ConversionModal from '@components/ConversionModal/ConversionModal';
 import Loader from '@components/Loader/Loader';
+import { CurrencyCodes } from '@constants/currency';
 import useLoadImage from '@utils/hooks/useLoadImage';
 import { CurrencyPanelProps } from 'interfaces/currency.inteface';
 import PropTypes from 'prop-types';
 
 import { CurrencyName, ValueIcon, ValuePanelContainer } from './styled';
 
-const ValuePanel = ({ item, value, isCurrency }: CurrencyPanelProps) => {
+const ValuePanel = ({
+  item = {},
+  value = 0,
+  isCurrency = false,
+}: CurrencyPanelProps) => {
   if (!item) {
     return (
       <ValuePanelContainer iscurrency={false}>
@@ -30,7 +35,7 @@ const ValuePanel = ({ item, value, isCurrency }: CurrencyPanelProps) => {
       <ConversionModal
         isOpen={modalIsOpen}
         onRequestClose={toggleModal}
-        conversionData={{ code: item.code ?? '', value }}
+        conversionData={{ code: item.code ?? CurrencyCodes.USD, value }}
       />
       <ValuePanelContainer
         data-testid={isCurrency ? 'value-panel-container' : ''}

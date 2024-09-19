@@ -1,29 +1,26 @@
 import { FETCH_INTERVAL } from '@constants/urls';
 import axios, { AxiosError } from 'axios';
-import PropTypes, { string } from 'prop-types';
+import PropTypes from 'prop-types';
 
-interface headrsProps {
+interface HeadersProps {
   [key: string]: string;
 }
 
 const fetchData = async (
   url: string,
   params: Record<string, any>,
-  headers: headrsProps,
+  headers: HeadersProps,
   isInterval: boolean = false,
   cacheDuration: number = FETCH_INTERVAL,
 ): Promise<any> => {
   const cacheKey = `${url}`;
-
   const cachedData = localStorage.getItem(cacheKey);
+
   if (cachedData) {
     const { data, timestamp } = JSON.parse(cachedData);
     const now = Date.now();
-    if (!isInterval) {
-      return data;
-    }
-
-    if (now - timestamp <= cacheDuration) {
+    const isCacheValid = now - timestamp <= cacheDuration;
+    if (!isInterval || isCacheValid) {
       return data;
     }
   }
@@ -43,7 +40,7 @@ const fetchData = async (
   }
 };
 
-fetchData.propType = {
+fetchData.propTypes = {
   url: PropTypes.string.isRequired,
   params: PropTypes.object.isRequired,
   headers: PropTypes.object.isRequired,

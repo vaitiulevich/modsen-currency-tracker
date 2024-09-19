@@ -1,6 +1,6 @@
 # Currency tracker site
 
-Demo:https://vaitiulevich.github.io/modsen-currency-tracker/
+Demo: https://main--mod-curr-track.netlify.app/
 
 ##Description
 

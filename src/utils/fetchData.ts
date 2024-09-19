@@ -1,6 +1,5 @@
 import { FETCH_INTERVAL } from '@constants/urls';
 import axios, { AxiosError } from 'axios';
-import PropTypes from 'prop-types';
 
 interface HeadersProps {
   [key: string]: string;
@@ -38,14 +37,6 @@ const fetchData = async (
   } catch (error) {
     throw error as AxiosError;
   }
-};
-
-fetchData.propTypes = {
-  url: PropTypes.string.isRequired,
-  params: PropTypes.object.isRequired,
-  headers: PropTypes.object.isRequired,
-  isInterval: PropTypes.bool,
-  cacheDuration: PropTypes.number,
 };
 
 export default fetchData;

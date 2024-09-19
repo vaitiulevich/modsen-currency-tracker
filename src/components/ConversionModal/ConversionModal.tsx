@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { ALL_CURRENCY, CurrencyCodes } from '@constants/currency';
 import { endPoints, URL_CURRENCY_API } from '@constants/urls';
 import { ConversionModalProps } from 'interfaces/convirsation.interface';
-import PropTypes from 'prop-types';
 
 import {
   CloseButton,
@@ -151,15 +150,6 @@ const ConversionModal = ({
     modalContent,
     document.getElementById('modal-root')!,
   );
-};
-
-ConversionModal.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  onRequestClose: PropTypes.func.isRequired,
-  conversionData: PropTypes.shape({
-    code: PropTypes.string.isRequired,
-    value: PropTypes.number.isRequired,
-  }).isRequired,
 };
 
 export default ConversionModal;

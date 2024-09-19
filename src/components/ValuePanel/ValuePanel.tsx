@@ -4,15 +4,10 @@ import Loader from '@components/Loader/Loader';
 import { CurrencyCodes } from '@constants/currency';
 import useLoadImage from '@utils/hooks/useLoadImage';
 import { CurrencyPanelProps } from 'interfaces/currency.inteface';
-import PropTypes from 'prop-types';
 
 import { CurrencyName, ValueIcon, ValuePanelContainer } from './styled';
 
-const ValuePanel = ({
-  item = {},
-  value = 0,
-  isCurrency = false,
-}: CurrencyPanelProps) => {
+const ValuePanel = ({ item, value, isCurrency }: CurrencyPanelProps) => {
   if (!item) {
     return (
       <ValuePanelContainer iscurrency={false}>
@@ -58,15 +53,6 @@ const ValuePanel = ({
       </ValuePanelContainer>
     </>
   );
-};
-
-ValuePanel.propTypes = {
-  item: PropTypes.shape({
-    code: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-  }),
-  value: PropTypes.number.isRequired,
-  isCurrency: PropTypes.bool.isRequired,
 };
 
 export default memo(ValuePanel);

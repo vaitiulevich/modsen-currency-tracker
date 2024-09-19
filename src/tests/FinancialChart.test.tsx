@@ -1,4 +1,3 @@
-import { Chart } from 'react-chartjs-2';
 import FinancialChart from '@components/FinancialChart/FinancialChart';
 import { ThemeProvider } from '@store/ThemeContext';
 import TimelineContext, { TimelineContextType } from '@store/TimelineContext';

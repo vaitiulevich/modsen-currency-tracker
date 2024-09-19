@@ -1,4 +1,3 @@
-import React from 'react';
 import Menu from '@components/Menu/Menu';
 import { ThemeProvider } from '@store/ThemeContext';
 import { fireEvent, render, screen } from '@testing-library/react';

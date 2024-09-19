@@ -1,4 +1,3 @@
-import React from 'react';
 import ToggleSwitch, {
   ToggleSwitchProps,
 } from '@components/ToggleSwitch/ToggleSwitch';

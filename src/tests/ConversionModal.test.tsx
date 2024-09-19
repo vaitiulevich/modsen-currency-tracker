@@ -1,6 +1,4 @@
-import React from 'react';
 import ConversionModal from '@components/ConversionModal/ConversionModal';
-import { ALL_CURRENCY } from '@constants/currency';
 import { ThemeProvider } from '@store/ThemeContext';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { ConversionModalProps } from 'interfaces/convirsation.interface';
@@ -36,7 +34,11 @@ const renderModal = ({
 };
 
 describe('ConversionModal', () => {
+  let modalContainer: HTMLElement;
   beforeEach(() => {
+    modalContainer = document.createElement('div');
+    modalContainer.setAttribute('id', 'modal-root');
+    document.body.appendChild(modalContainer);
     localStorage.setItem(
       'https://api.example.com/latestCurrency',
       JSON.stringify({
